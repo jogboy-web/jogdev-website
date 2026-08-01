@@ -712,6 +712,39 @@
       border: 1px solid rgba(212, 175, 55, 0.1);
     }
 
+    /* Product images (Unsplash) fill the card area */
+    .product-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .product-card:hover .product-img {
+      transform: scale(1.1);
+    }
+    .product-badge {
+      z-index: 3;
+    }
+
+    /* Hero perfume image (Unsplash) as a rich background */
+    .hero-perfume-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 40px;
+      opacity: 0.92;
+      z-index: 1;
+      display: block;
+    }
+    .hero-perfume .perfume-bottle {
+      z-index: 2;
+    }
+
     /* Color variants for different perfumes */
     .product-card:nth-child(1) .product-bottle-placeholder { background: linear-gradient(180deg, rgba(212,175,55,0.25), rgba(212,175,55,0.1)); }
     .product-card:nth-child(2) .product-bottle-placeholder { background: linear-gradient(180deg, rgba(192,132,252,0.25), rgba(192,132,252,0.1)); }
@@ -1582,7 +1615,7 @@
           <div class="hero-ring r1"></div>
           <div class="hero-ring r2"></div>
           <div class="hero-ring r3"></div>
-          <div class="hero-perfume">
+          <div class="hero-perfume"><img class="hero-perfume-img" src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80&auto=format&fit=crop" alt="Parfum premium DuniaWangi" loading="lazy" />
             <div class="hero-sparkle"></div>
             <div class="perfume-bottle">
               <div class="liquid"></div>
@@ -1661,7 +1694,7 @@
         <div class="product-card reveal" style="transition-delay: 0.1s;">
           <div class="product-image">
             <div class="product-badge">Best Seller</div>
-            <div class="product-bottle-placeholder hover-zoom"></div>
+            <img class="product-img" src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&q=80&auto=format&fit=crop" alt="Midnight Oud" loading="lazy" />
           </div>
           <div class="product-info">
             <h3>Midnight Oud</h3>
@@ -1685,7 +1718,7 @@
         <div class="product-card reveal" style="transition-delay: 0.2s;">
           <div class="product-image">
             <div class="product-badge">Popular</div>
-            <div class="product-bottle-placeholder hover-zoom"></div>
+            <img class="product-img" src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80&auto=format&fit=crop" alt="Velvet Iris" loading="lazy" />
           </div>
           <div class="product-info">
             <h3>Velvet Iris</h3>
@@ -1709,7 +1742,7 @@
         <div class="product-card reveal" style="transition-delay: 0.3s;">
           <div class="product-image">
             <div class="product-badge">Hot</div>
-            <div class="product-bottle-placeholder hover-zoom"></div>
+            <img class="product-img" src="https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=800&q=80&auto=format&fit=crop" alt="Rose Noir" loading="lazy" />
           </div>
           <div class="product-info">
             <h3>Rose Noir</h3>
@@ -1733,7 +1766,7 @@
         <div class="product-card reveal" style="transition-delay: 0.4s;">
           <div class="product-image">
             <div class="product-badge">New</div>
-            <div class="product-bottle-placeholder hover-zoom"></div>
+            <img class="product-img" src="https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=800&q=80&auto=format&fit=crop" alt="Azure Marine" loading="lazy" />
           </div>
           <div class="product-info">
             <h3>Azure Marine</h3>
@@ -1757,7 +1790,7 @@
         <div class="product-card reveal" style="transition-delay: 0.5s;">
           <div class="product-image">
             <div class="product-badge">Limited</div>
-            <div class="product-bottle-placeholder hover-zoom"></div>
+            <img class="product-img" src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800&q=80&auto=format&fit=crop" alt="Golden Ambergris" loading="lazy" />
           </div>
           <div class="product-info">
             <h3>Golden Ambergris</h3>
@@ -1781,7 +1814,7 @@
         <div class="product-card reveal" style="transition-delay: 0.6s;">
           <div class="product-image">
             <div class="product-badge">Best Seller</div>
-            <div class="product-bottle-placeholder hover-zoom"></div>
+            <img class="product-img" src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800&q=80&auto=format&fit=crop" alt="Mystic Jasmine" loading="lazy" />
           </div>
           <div class="product-info">
             <h3>Mystic Jasmine</h3>

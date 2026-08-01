@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DuniaWangi – Premium Perfume Collection</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 (Free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <style>
+    /* ============================================
+       CSS VARIABLES & RESET
+       ============================================ */
+    :root {
+      --primary-bg: #0F172A;
+      --secondary-bg: #1E293B;
+      --luxury-gold: #D4AF37;
+      --accent-purple: #C084FC;
+      --card-bg: #FFFFFF;
+      --primary-text: #FFFFFF;
+      --secondary-text: #CBD5E1;
+      --border-gold: rgba(212, 175, 55, 0.25);
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Poppins', sans-serif;
+      --radius-card: 18px;
+      --radius-btn: 50px;
+      --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.3);
+      --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.15);
+      --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F5D77B 50%, #D4AF37 100%);
+      --dark-gradient: linear-gradient(160deg, #0F172A 0%, #1E293B 40%, #0F172A 100%);
+      --hero-gradient: linear-gradient(135deg, rgba(15,23,42,1) 0%, rgba(30,41,59,1) 50%, rgba(15,23,42,1) 100%);
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--primary-bg);
+      color: var(--primary-text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-padding {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: var(--primary-text);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--secondary-text);
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 56px;
+      font-weight: 300;
+    }
+
+    .gold-text {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ============================================
+       BUTTONS
+       ============================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      border-radius: var(--radius-btn);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--gold-gradient);
+      color: #0F172A;
+      box-shadow: 0 4px 25px rgba(212, 175, 55, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 40px rgba(212, 175, 55, 0.5);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--luxury-gold);
+      border: 2px solid var(--luxury-gold);
+    }
+    .btn-outline:hover {
+      background: var(--luxury-gold);
+      color: #0F172A;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-outline-light {
+      background: transparent;
+      color: var(--primary-text);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    .btn-outline-light:hover {
+      border-color: var(--luxury-gold);
+      color: var(--luxury-gold);
+      transform: translateY(-3px);
+    }
+
+    /* ============================================
+       SCROLL ANIMATIONS
+       ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ============================================
+       1. STICKY NAVBAR
+       ============================================ */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 16px 0;
+      transition: var(--transition);
+      background: transparent;
+    }
+    .navbar.scrolled {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--luxury-gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-logo i {
+      font-size: 1.4rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--secondary-text);
+      position: relative;
+      padding-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold-gradient);
+      transition: var(--transition);
+    }
+    .nav-links a:hover {
+      color: var(--luxury-gold);
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    .nav-links .btn {
+      padding: 10px 28px;
+      font-size: 0.85rem;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      padding: 4px;
+      z-index: 1001;
+    }
+    .hamburger span {
+      width: 28px;
+      height: 2.5px;
+      background: var(--primary-text);
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* ============================================
+       2. HERO SECTION
+       ============================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background: var(--hero-gradient);
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    /* Animated particles / glow */
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hero-particles span {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--luxury-gold);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: floatParticle 12s infinite ease-in-out;
+    }
+    .hero-particles span:nth-child(1) { top: 15%; left: 10%; animation-delay: 0s; width: 8px; height: 8px; }
+    .hero-particles span:nth-child(2) { top: 30%; left: 80%; animation-delay: 2s; }
+    .hero-particles span:nth-child(3) { top: 70%; left: 20%; animation-delay: 4s; width: 10px; height: 10px; opacity: 0.2; }
+    .hero-particles span:nth-child(4) { top: 50%; left: 50%; animation-delay: 6s; }
+    .hero-particles span:nth-child(5) { top: 85%; left: 75%; animation-delay: 8s; width: 4px; height: 4px; }
+    .hero-particles span:nth-child(6) { top: 10%; left: 55%; animation-delay: 10s; }
+
+    @keyframes floatParticle {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.2; }
+      50% { transform: translateY(-80px) scale(1.5); opacity: 0.6; }
+    }
+
+    /* Glow orbs */
+    .hero-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.15;
+    }
+    .hero-glow.gold {
+      width: 500px;
+      height: 500px;
+      background: var(--luxury-gold);
+      top: -10%;
+      right: -10%;
+      animation: pulseGlow 6s ease-in-out infinite alternate;
+    }
+    .hero-glow.purple {
+      width: 400px;
+      height: 400px;
+      background: var(--accent-purple);
+      bottom: -5%;
+      left: -5%;
+      animation: pulseGlow 8s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(1); opacity: 0.1; }
+      100% { transform: scale(1.3); opacity: 0.25; }
+    }
+
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content {
+      padding-right: 20px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 20px;
+      border: 1px solid var(--border-gold);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: var(--luxury-gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      backdrop-filter: blur(4px);
+    }
+    .hero-badge i {
+      font-size: 0.7rem;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.8rem, 7vw, 4.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--secondary-text);
+      max-width: 500px;
+      margin-bottom: 40px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-image {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Perfume bottle placeholder using CSS art + overlay */
+    .hero-perfume-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .hero-perfume {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #2a1f3d 0%, #1a1a2e 50%, #0f0f1f 100%);
+      border-radius: 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 30px 80px rgba(212, 175, 55, 0.15),
+        inset 0 0 60px rgba(212, 175, 55, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    /* Glass reflections */
+    .hero-perfume::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.15) 45%, transparent 60%);
+      z-index: 2;
+    }
+
+    /* Bottle shape */
+    .perfume-bottle {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 45%;
+      height: 65%;
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.08) 100%);
+      border-radius: 20px 20px 30px 30px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.1);
+    }
+
+    .perfume-bottle::before {
+      content: '';
+      position: absolute;
+      top: -25%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30%;
+      height: 28%;
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.1));
+      border-radius: 8px 8px 4px 4px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .perfume-bottle .liquid {
+      position: absolute;
+      bottom: 8%;
+      left: 10%;
+      width: 80%;
+      height: 40%;
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.4), rgba(192, 132, 252, 0.3));
+      border-radius: 0 0 20px 20px;
+      animation: liquidShimmer 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes liquidShimmer {
+      0% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    /* Golden sparkle overlay */
+    .hero-sparkle {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(212,175,55,0.12) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 70%, rgba(192,132,252,0.08) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    /* Decorative rings */
+    .hero-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.12);
+      animation: ringFloat 8s ease-in-out infinite alternate;
+    }
+    .hero-ring.r1 {
+      width: 120%;
+      height: 120%;
+      top: -10%;
+      left: -10%;
+    }
+    .hero-ring.r2 {
+      width: 140%;
+      height: 140%;
+      top: -20%;
+      left: -20%;
+      animation-delay: 2s;
+    }
+    .hero-ring.r3 {
+      width: 160%;
+      height: 160%;
+      top: -30%;
+      left: -30%;
+      animation-delay: 4s;
+      border-color: rgba(192, 132, 252, 0.08);
+    }
+
+    @keyframes ringFloat {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.4; }
+      100% { transform: rotate(5deg) scale(1.05); opacity: 0.8; }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--secondary-text);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: bounceDown 2s infinite;
+      z-index: 2;
+    }
+    .scroll-indicator i {
+      font-size: 1rem;
+      color: var(--luxury-gold);
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ============================================
+       3. FEATURED COLLECTIONS
+       ============================================ */
+    .collections {
+      background: var(--secondary-bg);
+      position: relative;
+    }
+
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 24px;
+    }
+
+    .collection-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-card);
+      padding: 36px 20px 32px;
+      text-align: center;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .collection-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold-gradient);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .collection-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--border-gold);
+      box-shadow: 0 20px 60px rgba(212, 175, 55, 0.08);
+    }
+    .collection-card:hover::before {
+      opacity: 1;
+    }
+
+    .collection-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      background: rgba(212, 175, 55, 0.08);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--luxury-gold);
+      transition: var(--transition);
+    }
+    .collection-card:hover .collection-icon {
+      background: rgba(212, 175, 55, 0.18);
+      transform: scale(1.1);
+    }
+
+    .collection-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .collection-card p {
+      font-size: 0.85rem;
+      color: var(--secondary-text);
+      font-weight: 300;
+    }
+
+    /* ============================================
+       4. BEST SELLER PRODUCTS
+       ============================================ */
+    .best-seller {
+      background: var(--primary-bg);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-12px);
+      border-color: var(--border-gold);
+      box-shadow: 0 25px 70px rgba(212, 175, 55, 0.06);
+    }
+
+    .product-image {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #1E293B 0%, #0F172A 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Placeholder perfume bottles for products */
+    .product-bottle-placeholder {
+      width: 80px;
+      height: 180px;
+      background: linear-gradient(180deg, rgba(212, 175, 55, 0.2), rgba(192, 132, 252, 0.15));
+      border-radius: 12px 12px 20px 20px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      position: relative;
+      backdrop-filter: blur(4px);
+      transition: var(--transition);
+    }
+    .product-bottle-placeholder::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30%;
+      height: 22%;
+      background: rgba(212, 175, 55, 0.2);
+      border-radius: 6px 6px 2px 2px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+    }
+
+    /* Color variants for different perfumes */
+    .product-card:nth-child(1) .product-bottle-placeholder { background: linear-gradient(180deg, rgba(212,175,55,0.25), rgba(212,175,55,0.1)); }
+    .product-card:nth-child(2) .product-bottle-placeholder { background: linear-gradient(180deg, rgba(192,132,252,0.25), rgba(192,132,252,0.1)); }
+    .product-card:nth-child(3) .product-bottle-placeholder { background: linear-gradient(180deg, rgba(255,107,107,0.2), rgba(255,107,107,0.08)); }
+    .product-card:nth-child(4) .product-bottle-placeholder { background: linear-gradient(180deg, rgba(72,202,228,0.2), rgba(72,202,228,0.08)); }
+    .product-card:nth-child(5) .product-bottle-placeholder { background: linear-gradient(180deg, rgba(255,215,0,0.25), rgba(255,215,0,0.1)); }
+    .product-card:nth-child(6) .product-bottle-placeholder { background: linear-gradient(180deg, rgba(255,154,108,0.2), rgba(255,154,108,0.08)); }
+
+    .product-image .hover-zoom {
+      transition: var(--transition);
+    }
+    .product-card:hover .product-bottle-placeholder {
+      transform: scale(1.12);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: var(--gold-gradient);
+      color: #0F172A;
+    }
+
+    .product-info {
+      padding: 24px;
+    }
+
+    .product-info h3 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .product-scent {
+      font-size: 0.85rem;
+      color: var(--secondary-text);
+      margin-bottom: 12px;
+      font-weight: 300;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+    .product-rating i {
+      color: var(--luxury-gold);
+      font-size: 0.85rem;
+    }
+    .product-rating span {
+      font-size: 0.8rem;
+      color: var(--secondary-text);
+      margin-left: 6px;
+    }
+
+    .product-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--luxury-gold);
+    }
+
+    .btn-sm {
+      padding: 8px 20px;
+      font-size: 0.8rem;
+    }
+
+    /* ============================================
+       5. WHY CHOOSE DUNIAWANGI
+       ============================================ */
+    .why-us {
+      background: var(--secondary-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 28px;
+    }
+
+    .benefit-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-card);
+      padding: 36px 28px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .benefit-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-gold);
+      box-shadow: 0 15px 50px rgba(212, 175, 55, 0.05);
+    }
+
+    .benefit-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(192, 132, 252, 0.08));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: var(--luxury-gold);
+      transition: var(--transition);
+    }
+    .benefit-card:hover .benefit-icon {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(192, 132, 252, 0.12));
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .benefit-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .benefit-card p {
+      font-size: 0.88rem;
+      color: var(--secondary-text);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ============================================
+       6. CUSTOMER REVIEWS
+       ============================================ */
+    .reviews {
+      background: var(--primary-bg);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .review-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-card);
+      padding: 32px 28px;
+      transition: var(--transition);
+      position: relative;
+    }
+    .review-card::before {
+      content: '\201C';
+      font-family: var(--font-heading);
+      font-size: 4rem;
+      color: var(--luxury-gold);
+      opacity: 0.15;
+      position: absolute;
+      top: 12px;
+      right: 24px;
+      line-height: 1;
+    }
+    .review-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-gold);
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .review-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--luxury-gold), var(--accent-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #0F172A;
+      flex-shrink: 0;
+    }
+
+    .review-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .review-stars {
+      display: flex;
+      gap: 3px;
+      margin-top: 2px;
+    }
+    .review-stars i {
+      color: var(--luxury-gold);
+      font-size: 0.8rem;
+    }
+
+    .review-text {
+      font-size: 0.92rem;
+      color: var(--secondary-text);
+      font-weight: 300;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    /* ============================================
+       7. LIMITED EDITION BANNER
+       ============================================ */
+    .limited-banner {
+      background: linear-gradient(160deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 100px 0;
+    }
+    .limited-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(192,132,252,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .limited-banner .overlay-gold {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold-gradient);
+      opacity: 0.6;
+    }
+    .limited-banner .overlay-gold.bottom {
+      top: auto;
+      bottom: 0;
+    }
+
+    .limited-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .limited-badge {
+      display: inline-block;
+      padding: 6px 24px;
+      border: 1px solid var(--luxury-gold);
+      border-radius: 50px;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--luxury-gold);
+      margin-bottom: 24px;
+    }
+
+    .limited-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .limited-title span {
+      display: block;
+    }
+
+    .limited-desc {
+      font-size: 1rem;
+      color: var(--secondary-text);
+      margin-bottom: 36px;
+      font-weight: 300;
+    }
+
+    /* ============================================
+       8. FAQ
+       ============================================ */
+    .faq {
+      background: var(--secondary-bg);
+    }
+
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .faq-item.active {
+      border-color: var(--border-gold);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: none;
+      border: none;
+      color: var(--primary-text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: var(--transition);
+      gap: 16px;
+    }
+    .faq-question i {
+      color: var(--luxury-gold);
+      font-size: 1.2rem;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 24px;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      padding: 0 24px 20px;
+    }
+
+    .faq-answer p {
+      font-size: 0.92rem;
+      color: var(--secondary-text);
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    /* ============================================
+       9. CONTACT SECTION
+       ============================================ */
+    .contact {
+      background: var(--primary-bg);
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      transition: var(--transition);
+    }
+    .contact-item:hover {
+      border-color: var(--border-gold);
+      transform: translateX(6px);
+    }
+
+    .contact-item-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(212, 175, 55, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--luxury-gold);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-item h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .contact-item p {
+      font-size: 0.85rem;
+      color: var(--secondary-text);
+      font-weight: 300;
+    }
+
+    .contact-form {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-card);
+      padding: 36px 32px;
+    }
+
+    .contact-form h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      color: var(--primary-text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: var(--transition);
+      resize: vertical;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(203, 213, 225, 0.5);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--luxury-gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.08);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+    }
+
+    /* ============================================
+       10. FOOTER
+       ============================================ */
+    .footer {
+      background: #0a0a12;
+      border-top: 1px solid rgba(212, 175, 55, 0.1);
+      padding: 60px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: var(--secondary-text);
+      font-weight: 300;
+      margin-top: 16px;
+      max-width: 320px;
+      line-height: 1.8;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--secondary-text);
+      font-size: 1rem;
+      transition: var(--transition);
+      border: 1px solid transparent;
+    }
+    .footer-social a:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: var(--border-gold);
+      color: var(--luxury-gold);
+      transform: translateY(-3px);
+    }
+
+    .footer h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--primary-text);
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      font-size: 0.88rem;
+      color: var(--secondary-text);
+      font-weight: 300;
+      transition: var(--transition);
+      position: relative;
+      padding-left: 0;
+    }
+    .footer-links a:hover {
+      color: var(--luxury-gold);
+      padding-left: 6px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      color: var(--primary-text);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    .newsletter-form input:focus {
+      border-color: var(--luxury-gold);
+    }
+    .newsletter-form input::placeholder {
+      color: rgba(203, 213, 225, 0.4);
+    }
+    .newsletter-form button {
+      padding: 12px 20px;
+      background: var(--gold-gradient);
+      border: none;
+      border-radius: 10px;
+      color: #0F172A;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+    .newsletter-form button:hover {
+      transform: scale(1.05);
+    }
+
+    .footer-bottom {
+      padding: 24px 0;
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(203, 213, 225, 0.5);
+      font-weight: 300;
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      .hero .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+      .hero-content {
+        padding-right: 0;
+      }
+      .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      .hero-perfume-wrapper {
+        max-width: 300px;
+      }
+
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .section-padding {
+        padding: 60px 0;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(24px);
+        flex-direction: column;
+        justify-content: center;
+        gap: 28px;
+        padding: 40px;
+        transition: var(--transition);
+        border-left: 1px solid var(--border-gold);
+      }
+      .nav-links.open {
+        right: 0;
+      }
+      .nav-links a {
+        font-size: 1.1rem;
+      }
+      .hamburger {
+        display: flex;
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 10vw, 3rem);
+      }
+
+      .collection-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .reviews-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: center;
+      }
+      .footer-brand p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .footer-social {
+        justify-content: center;
+      }
+      .newsletter-form {
+        max-width: 360px;
+        margin: 12px auto 0;
+      }
+
+      .contact-form {
+        padding: 24px 20px;
+      }
+
+      .limited-banner {
+        padding: 60px 0;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+        max-width: 280px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .collection-grid {
+        grid-template-columns: 1fr;
+      }
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 0 16px;
+      }
+
+      .product-card .product-image {
+        height: 220px;
+      }
+
+      .faq-question {
+        padding: 16px 18px;
+        font-size: 0.9rem;
+      }
+      .faq-answer {
+        padding: 0 18px;
+      }
+      .faq-item.active .faq-answer {
+        padding: 0 18px 16px;
+      }
+    }
+
+    /* ============================================
+       DECORATIVE DIVIDER
+       ============================================ */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: var(--gold-gradient);
+      margin: 0 auto 16px;
+      border-radius: 4px;
+    }
+
+    /* Soft glow for CTA buttons */
+    .glow-cta {
+      animation: glowPulse 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes glowPulse {
+      0% { box-shadow: 0 4px 25px rgba(212, 175, 55, 0.3); }
+      100% { box-shadow: 0 4px 45px rgba(212, 175, 55, 0.6); }
+    }
+
+    /* Selection color */
+    ::selection {
+      background: var(--luxury-gold);
+      color: #0F172A;
+    }
+
+    /* Floating Kembali button – mobile optimisation */
+    @media (max-width: 768px) {
+      a[href="portofolio.html"][style*="position:fixed"] {
+        bottom: 12px;
+        left: 12px;
+        padding: 9px 14px;
+        font-size: 0.78rem;
+      }
+    }
+    @media (max-width: 480px) {
+      a[href="portofolio.html"][style*="position:fixed"] {
+        left: 8px;
+        bottom: 8px;
+        padding: 8px 12px;
+        gap: 6px;
+        border-radius: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Tombol Kembali Fixed -->
+  <a href="portofolio.html"
+     style="position:fixed; left:16px; bottom:16px; z-index:999; display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border-radius:50px; font-size:0.85rem; font-weight:600; color:#fff; background:linear-gradient(135deg,#9333EA,#EC4899); text-decoration:none; box-shadow:0 4px 24px rgba(147,51,234,0.3); transition:all 0.3s ease;"
+     onmouseover="this.style.background='linear-gradient(135deg,#7E22CE,#DB2777)'; this.style.transform='scale(1.05)'"
+     onmouseout="this.style.background='linear-gradient(135deg,#9333EA,#EC4899)'; this.style.transform='scale(1)'">
+      <i class="fa-solid fa-arrow-left"></i> Ke Website
+  </a>
+
+  <!-- ============================================
+       1. STICKY NAVBAR
+       ============================================ -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Navigasi utama">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <i class="fas fa-crown"></i>
+        DuniaWangi
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" onclick="closeMenu()">Home</a></li>
+        <li><a href="#collections" onclick="closeMenu()">Collection</a></li>
+        <li><a href="#best-seller" onclick="closeMenu()">Best Seller</a></li>
+        <li><a href="#about" onclick="closeMenu()">About</a></li>
+        <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        <li><a href="#best-seller" class="btn btn-primary btn-sm" onclick="closeMenu()">Shop Now</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger" aria-label="Buka menu" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       2. HERO SECTION
+       ============================================ -->
+  <section class="hero" id="home">
+    <!-- Background glow -->
+    <div class="hero-glow gold"></div>
+    <div class="hero-glow purple"></div>
+
+    <!-- Floating particles -->
+    <div class="hero-particles" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="container">
+      <div class="hero-content reveal-left">
+        <div class="hero-badge">
+          <i class="fas fa-sparkles"></i> New Collection 2025
+        </div>
+        <h1 class="hero-title">
+          <span>Elevate Your</span>
+          <span class="gold-text">Senses</span>
+          <span>With Every Scent</span>
+        </h1>
+        <p class="hero-subtitle">
+          Discover the world of luxury fragrances at DuniaWangi. From daily elegance to exclusive masterpieces, every bottle tells a story of sophistication and timeless charm.
+        </p>
+        <div class="hero-buttons">
+          <a href="#collections" class="btn btn-primary glow-cta">
+            <i class="fas fa-arrow-right"></i> Explore Collection
+          </a>
+          <a href="#best-seller" class="btn btn-outline-light">
+            <i class="fas fa-star"></i> Best Seller
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-image reveal-right">
+        <div class="hero-perfume-wrapper">
+          <div class="hero-ring r1"></div>
+          <div class="hero-ring r2"></div>
+          <div class="hero-ring r3"></div>
+          <div class="hero-perfume">
+            <div class="hero-sparkle"></div>
+            <div class="perfume-bottle">
+              <div class="liquid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- ============================================
+       3. FEATURED COLLECTIONS
+       ============================================ -->
+  <section class="collections section-padding" id="collections">
+    <div class="container">
+      <h2 class="section-title reveal">Our <span class="gold-text">Collections</span></h2>
+      <div class="divider"></div>
+      <p class="section-subtitle reveal">
+        Explore our carefully curated collections, each designed to capture a unique facet of your personality.
+      </p>
+
+      <div class="collection-grid">
+        <div class="collection-card reveal" style="transition-delay: 0.1s;">
+          <div class="collection-icon"><i class="fas fa-male"></i></div>
+          <h3>Men's Collection</h3>
+          <p>Bold, charismatic, and timeless fragrances for the modern gentleman.</p>
+        </div>
+        <div class="collection-card reveal" style="transition-delay: 0.2s;">
+          <div class="collection-icon"><i class="fas fa-female"></i></div>
+          <h3>Women's Collection</h3>
+          <p>Elegant, floral, and captivating scents that celebrate femininity.</p>
+        </div>
+        <div class="collection-card reveal" style="transition-delay: 0.3s;">
+          <div class="collection-icon"><i class="fas fa-gem"></i></div>
+          <h3>Luxury Series</h3>
+          <p>Exquisite blends crafted from the world's rarest ingredients.</p>
+        </div>
+        <div class="collection-card reveal" style="transition-delay: 0.4s;">
+          <div class="collection-icon"><i class="fas fa-star"></i></div>
+          <h3>Signature Collection</h3>
+          <p>Our most iconic fragrances, curated for those who seek distinction.</p>
+        </div>
+        <div class="collection-card reveal" style="transition-delay: 0.5s;">
+          <div class="collection-icon"><i class="fas fa-leaf"></i></div>
+          <h3>Daily Perfume</h3>
+          <p>Light, fresh, and versatile scents perfect for everyday wear.</p>
+        </div>
+        <div class="collection-card reveal" style="transition-delay: 0.6s;">
+          <div class="collection-icon"><i class="fas fa-gift"></i></div>
+          <h3>Gift Collection</h3>
+          <p>Beautifully packaged sets that make every occasion unforgettable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       4. BEST SELLER PRODUCTS
+       ============================================ -->
+  <section class="best-seller section-padding" id="best-seller">
+    <div class="container">
+      <h2 class="section-title reveal">Best <span class="gold-text">Seller</span></h2>
+      <div class="divider"></div>
+      <p class="section-subtitle reveal">
+        Discover the fragrances everyone is raving about. These best sellers have captured hearts worldwide.
+      </p>
+
+      <div class="products-grid">
+        <!-- Product 1 -->
+        <div class="product-card reveal" style="transition-delay: 0.1s;">
+          <div class="product-image">
+            <div class="product-badge">Best Seller</div>
+            <div class="product-bottle-placeholder hover-zoom"></div>
+          </div>
+          <div class="product-info">
+            <h3>Midnight Oud</h3>
+            <p class="product-scent">Oud, Amber, Musk</p>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(4.9)</span>
+            </div>
+            <div class="product-bottom">
+              <span class="product-price">Rp 289.000</span>
+              <a href="#" class="btn btn-primary btn-sm">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card reveal" style="transition-delay: 0.2s;">
+          <div class="product-image">
+            <div class="product-badge">Popular</div>
+            <div class="product-bottle-placeholder hover-zoom"></div>
+          </div>
+          <div class="product-info">
+            <h3>Velvet Iris</h3>
+            <p class="product-scent">Iris, Vanilla, Sandalwood</p>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(4.8)</span>
+            </div>
+            <div class="product-bottom">
+              <span class="product-price">Rp 325.000</span>
+              <a href="#" class="btn btn-primary btn-sm">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card reveal" style="transition-delay: 0.3s;">
+          <div class="product-image">
+            <div class="product-badge">Hot</div>
+            <div class="product-bottle-placeholder hover-zoom"></div>
+          </div>
+          <div class="product-info">
+            <h3>Rose Noir</h3>
+            <p class="product-scent">Rose, Blackcurrant, Patchouli</p>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(4.7)</span>
+            </div>
+            <div class="product-bottom">
+              <span class="product-price">Rp 359.000</span>
+              <a href="#" class="btn btn-primary btn-sm">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="product-card reveal" style="transition-delay: 0.4s;">
+          <div class="product-image">
+            <div class="product-badge">New</div>
+            <div class="product-bottle-placeholder hover-zoom"></div>
+          </div>
+          <div class="product-info">
+            <h3>Azure Marine</h3>
+            <p class="product-scent">Sea Salt, Bergamot, Cedar</p>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(5.0)</span>
+            </div>
+            <div class="product-bottom">
+              <span class="product-price">Rp 279.000</span>
+              <a href="#" class="btn btn-primary btn-sm">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="product-card reveal" style="transition-delay: 0.5s;">
+          <div class="product-image">
+            <div class="product-badge">Limited</div>
+            <div class="product-bottle-placeholder hover-zoom"></div>
+          </div>
+          <div class="product-info">
+            <h3>Golden Ambergris</h3>
+            <p class="product-scent">Ambergris, Saffron, Leather</p>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <span>(4.9)</span>
+            </div>
+            <div class="product-bottom">
+              <span class="product-price">Rp 499.000</span>
+              <a href="#" class="btn btn-primary btn-sm">View Details</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="product-card reveal" style="transition-delay: 0.6s;">
+          <div class="product-image">
+            <div class="product-badge">Best Seller</div>
+            <div class="product-bottle-placeholder hover-zoom"></div>
+          </div>
+          <div class="product-info">
+            <h3>Mystic Jasmine</h3>
+            <p class="product-scent">Jasmine, Tuberose, Musk</p>
+            <div class="product-rating">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <span>(4.8)</span>
+            </div>
+            <div class="product-bottom">
+              <span class="product-price">Rp 299.000</span>
+              <a href="#" class="btn btn-primary btn-sm">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       5. WHY CHOOSE DUNIAWANGI
+       ============================================ -->
+  <section class="why-us section-padding" id="about">
+    <div class="container">
+      <h2 class="section-title reveal">Why Choose <span class="gold-text">DuniaWangi</span></h2>
+      <div class="divider"></div>
+      <p class="section-subtitle reveal">
+        We are dedicated to bringing you an unparalleled fragrance experience. Here's why our customers trust us.
+      </p>
+
+      <div class="benefits-grid">
+        <div class="benefit-card reveal" style="transition-delay: 0.1s;">
+          <div class="benefit-icon"><i class="fas fa-clock"></i></div>
+          <h3>Aroma Tahan Lama</h3>
+          <p>Formulasi premium yang memberikan ketahanan aroma hingga 12+ jam, memastikan Anda tetap wangi sepanjang hari.</p>
+        </div>
+        <div class="benefit-card reveal" style="transition-delay: 0.2s;">
+          <div class="benefit-icon"><i class="fas fa-leaf"></i></div>
+          <h3>Bahan Berkualitas</h3>
+          <p>Menggunakan bahan baku terbaik dari Prancis, Italia, dan Timur Tengah dengan standar kualitas internasional.</p>
+        </div>
+        <div class="benefit-card reveal" style="transition-delay: 0.3s;">
+          <div class="benefit-icon"><i class="fas fa-flask"></i></div>
+          <h3>Desain Botol Elegan</h3>
+          <p>Kemasan botol premium dengan desain artistik yang mencerminkan kemewahan dan eksklusivitas setiap produk.</p>
+        </div>
+        <div class="benefit-card reveal" style="transition-delay: 0.4s;">
+          <div class="benefit-icon"><i class="fas fa-list-ul"></i></div>
+          <h3>Banyak Pilihan Aroma</h3>
+          <p>Koleksi lebih dari 50 varian aroma yang dikurasi khusus untuk pria, wanita, dan kolektor parfum.</p>
+        </div>
+        <div class="benefit-card reveal" style="transition-delay: 0.5s;">
+          <div class="benefit-icon"><i class="fas fa-shipping-fast"></i></div>
+          <h3>Pengiriman Aman</h3>
+          <p>Packing eksklusif dengan jaminan keamanan produk. Gratis ongkir untuk pembelian di atas Rp 200.000.</p>
+        </div>
+        <div class="benefit-card reveal" style="transition-delay: 0.6s;">
+          <div class="benefit-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Garansi Kepuasan</h3>
+          <p>Garansi 100% uang kembali jika produk tidak sesuai. Kami berkomitmen memberikan pelayanan terbaik.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       6. CUSTOMER REVIEWS
+       ============================================ -->
+  <section class="reviews section-padding">
+    <div class="container">
+      <h2 class="section-title reveal">What Our <span class="gold-text">Customers Say</span></h2>
+      <div class="divider"></div>
+      <p class="section-subtitle reveal">
+        Real reviews from real people who have experienced the magic of DuniaWangi.
+      </p>
+
+      <div class="reviews-grid">
+        <div class="review-card reveal" style="transition-delay: 0.1s;">
+          <div class="review-header">
+            <div class="review-avatar">SA</div>
+            <div>
+              <div class="review-name">Sarah Amanda</div>
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">
+            "Aromanya sangat tahan lama! Saya memakai Velvet Iris ke kantor pagi hari, dan sampai malam harumnya masih terasa. Botolnya juga cantik banget, cocok buat dijadikan hadiah."
+          </p>
+        </div>
+
+        <div class="review-card reveal" style="transition-delay: 0.2s;">
+          <div class="review-header">
+            <div class="review-avatar">RF</div>
+            <div>
+              <div class="review-name">Rafi Firmansyah</div>
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">
+            "Midnight Oud benar-benar parfum premium. Wanginya maskulin dan elegan. Banyak teman yang nanya pakai parfum apa. Recommended banget buat para profesional!"
+          </p>
+        </div>
+
+        <div class="review-card reveal" style="transition-delay: 0.3s;">
+          <div class="review-header">
+            <div class="review-avatar">DM</div>
+            <div>
+              <div class="review-name">Diana Maharani</div>
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">
+            "Pelayanan luar biasa! Pengiriman cepat, packing aman, dan parfumnya sesuai deskripsi. Saya sudah beli 3 kali dan pasti akan repeat order. DuniaWangi parfum terbaik!"
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       7. LIMITED EDITION BANNER
+       ============================================ -->
+  <section class="limited-banner">
+    <div class="overlay-gold"></div>
+    <div class="overlay-gold bottom"></div>
+    <div class="container">
+      <div class="limited-content reveal">
+        <div class="limited-badge">Exclusive Edition</div>
+        <h2 class="limited-title">
+          <span>Discover the</span>
+          <span class="gold-text">Essence of Luxury</span>
+        </h2>
+        <p class="limited-desc">
+          Our limited edition fragrance, crafted with the finest ingredients from around the world. 
+          Only 500 bottles available — each one numbered and signed.
+        </p>
+        <a href="#" class="btn btn-primary glow-cta">
+          <i class="fas fa-shopping-bag"></i> Shop Limited Edition
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       8. FAQ
+       ============================================ -->
+  <section class="faq section-padding">
+    <div class="container">
+      <h2 class="section-title reveal">Frequently Asked <span class="gold-text">Questions</span></h2>
+      <div class="divider"></div>
+      <p class="section-subtitle reveal">
+        Everything you need to know about DuniaWangi products and services.
+      </p>
+
+      <div class="faq-list">
+        <div class="faq-item reveal" style="transition-delay: 0.1s;">
+          <button class="faq-question" aria-expanded="false">
+            <span>Apakah parfum DuniaWangi original dan BPOM terdaftar?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Tentu! Semua produk DuniaWangi telah terdaftar di BPOM RI dan menggunakan bahan baku berkualitas tinggi yang diimpor langsung dari Perancis dan Italia. Setiap produk dilengkapi dengan sertifikat keaslian dan nomor batch yang dapat dilacak.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" style="transition-delay: 0.2s;">
+          <button class="faq-question" aria-expanded="false">
+            <span>Berapa lama ketahanan aroma parfum DuniaWangi?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Rata-rata ketahanan aroma parfum kami adalah 8–12 jam untuk kategori Eau de Parfum (EDP) dan 4–6 jam untuk Eau de Toilette (EDT). Untuk varian Luxury dan Exclusive series, ketahanan bisa mencapai 14+ jam dengan proyeksi aroma yang optimal.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" style="transition-delay: 0.3s;">
+          <button class="faq-question" aria-expanded="false">
+            <span>Apakah DuniaWangi menyediakan sample tester?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Ya, kami menyediakan sample tester untuk setiap varian parfum dengan harga terjangkau. Anda juga bisa mendapatkan sample gratis untuk setiap pembelian minimal Rp 150.000. Sample tersedia dalam ukuran 2ml spray yang praktis.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" style="transition-delay: 0.4s;">
+          <button class="faq-question" aria-expanded="false">
+            <span>Bagaimana cara pengembalian jika produk tidak sesuai?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Kami menyediakan garansi kepuasan 100%. Jika produk yang Anda terima tidak sesuai dengan pesanan atau terdapat kerusakan, Anda dapat mengajukan pengembalian dalam waktu 7 hari kerja. Tim kami akan memproses refund atau penggantian produk maksimal 3×24 jam.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal" style="transition-delay: 0.5s;">
+          <button class="faq-question" aria-expanded="false">
+            <span>Apakah ada program members atau reward?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Tentu! DuniaWangi memiliki program loyalitas dengan 3 tingkatan: Silver, Gold, dan Platinum. Setiap pembelian akan mengumpulkan poin yang bisa ditukarkan dengan produk gratis, diskon spesial, akses early launch, dan undangan ke exclusive event DuniaWangi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       9. CONTACT SECTION
+       ============================================ -->
+  <section class="contact section-padding" id="contact">
+    <div class="container">
+      <h2 class="section-title reveal">Get In <span class="gold-text">Touch</span></h2>
+      <div class="divider"></div>
+      <p class="section-subtitle reveal">
+        Have a question or just want to say hello? We'd love to hear from you.
+      </p>
+
+      <div class="contact-wrapper">
+        <div class="contact-info reveal-left">
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <h4>WhatsApp</h4>
+              <p>+62 812 3456 7890</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="far fa-envelope"></i></div>
+            <div>
+              <h4>Email</h4>
+              <p>hello@duniawangi.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fab fa-instagram"></i></div>
+            <div>
+              <h4>Instagram</h4>
+              <p>@duniawangi.official</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <h4>Lokasi</h4>
+              <p>Jl. Melati No. 42, Jakarta Selatan, Indonesia 12950</p>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form reveal-right" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda telah terkirim.');">
+          <h3>Send Us a Message</h3>
+          <div class="form-group">
+            <input type="text" placeholder="Nama Lengkap" required />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email" required />
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Subjek" />
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Tulis pesan Anda di sini..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary glow-cta" style="width:100%;justify-content:center;">
+            <i class="fas fa-paper-plane"></i> Kirim Pesan
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       10. FOOTER
+       ============================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <i class="fas fa-crown"></i>
+            DuniaWangi
+          </a>
+          <p>
+            DuniaWangi adalah brand parfum premium Indonesia yang menghadirkan koleksi aroma eksklusif dari seluruh dunia. Setiap botol adalah karya seni yang dirancang untuk memperkaya pengalaman indra penciuman Anda.
+          </p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#collections">Collection</a></li>
+            <li><a href="#best-seller">Best Seller</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#">Men's Parfume</a></li>
+            <li><a href="#">Women's Parfume</a></li>
+            <li><a href="#">Luxury Series</a></li>
+            <li><a href="#">Signature Collection</a></li>
+            <li><a href="#">Gift Sets</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Newsletter</h4>
+          <p style="font-size:0.88rem;color:var(--secondary-text);font-weight:300;margin-bottom:4px;">
+            Subscribe untuk mendapatkan info koleksi terbaru dan promo eksklusif.
+          </p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan!');">
+            <input type="email" placeholder="Email Anda" required />
+            <button type="submit"><i class="fas fa-arrow-right"></i></button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2025 DuniaWangi. All rights reserved. Crafted with <i class="fas fa-heart" style="color:var(--luxury-gold);"></i> for fragrance lovers.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       JAVASCRIPT
+       ============================================ -->
+  <script>
+    (function() {
+      'use strict';
+
+      // ===== Navbar scroll effect =====
+      const navbar = document.getElementById('navbar');
+      let lastScroll = 0;
+
+      window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+        lastScroll = currentScroll;
+      });
+
+      // ===== Hamburger menu =====
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+
+      function toggleMenu() {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('open');
+        const isOpen = navLinks.classList.contains('open');
+        hamburger.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
+
+      function closeMenu() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+        hamburger.setAttribute('aria-label', 'Buka menu');
+        document.body.style.overflow = '';
+      }
+
+      hamburger.addEventListener('click', toggleMenu);
+
+      // Close menu on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+          closeMenu();
+        }
+      });
+
+      // ===== Scroll Reveal Animation =====
+      const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+      function checkReveal() {
+        const windowHeight = window.innerHeight;
+        const revealThreshold = 120;
+
+        revealElements.forEach(function(el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < windowHeight - revealThreshold) {
+            el.classList.add('visible');
+          }
+        });
+      }
+
+      // Run on load, scroll, and resize
+      window.addEventListener('scroll', checkReveal);
+      window.addEventListener('resize', checkReveal);
+      // Use requestAnimationFrame for initial check
+      requestAnimationFrame(checkReveal);
+
+      // ===== FAQ Accordion =====
+      const faqItems = document.querySelectorAll('.faq-item');
+
+      faqItems.forEach(function(item) {
+        const question = item.querySelector('.faq-question');
+
+        question.addEventListener('click', function() {
+          const isActive = item.classList.contains('active');
+
+          // Close all FAQ items
+          faqItems.forEach(function(other) {
+            other.classList.remove('active');
+            other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          });
+
+          // Toggle current
+          if (!isActive) {
+            item.classList.add('active');
+            item.querySelector('.faq-question').setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      // ===== Smooth scroll for anchor links (fallback) =====
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // ===== Parallax effect on hero glow (optional subtle) =====
+      window.addEventListener('mousemove', function(e) {
+        const goldGlow = document.querySelector('.hero-glow.gold');
+        const purpleGlow = document.querySelector('.hero-glow.purple');
+        if (goldGlow && purpleGlow) {
+          const x = e.clientX / window.innerWidth;
+          const y = e.clientY / window.innerHeight;
+          goldGlow.style.transform = 'translate(' + (x * 20) + 'px, ' + (y * 20) + 'px)';
+          purpleGlow.style.transform = 'translate(' + (-x * 10) + 'px, ' + (-y * 10) + 'px)';
+        }
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

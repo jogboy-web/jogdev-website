@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontak — Jog.DEV</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        body {
+            background: #0b0f1a;
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        html { scroll-behavior: smooth; }
+        :root {
+            --accent: #14f1d9;
+            --accent-dim: #0dc2af;
+            --glass: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.06);
+        }
+
+        .glow-teal { text-shadow: 0 0 40px rgba(20, 241, 217, 0.15), 0 0 80px rgba(20, 241, 217, 0.06); }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(20, 241, 217, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(20, 241, 217, 0.06);
+        }
+
+        .btn-lift { transition: all 0.25s ease; }
+        .btn-lift:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(20, 241, 217, 0.18); }
+
+        .mobile-nav {
+            position: absolute;
+            top: 100%; left: 0; right: 0;
+            max-height: calc(100dvh - 4rem);
+            overflow-y: auto;
+            transition: max-height 0.35s ease, opacity 0.25s ease, transform 0.3s ease;
+            max-height: 0; opacity: 0; transform: translateY(-8px);
+            -webkit-overflow-scrolling: touch;
+        }
+        .mobile-nav.open { max-height: calc(100dvh - 4rem); opacity: 1; transform: translateY(0); }
+        #menu-toggle {
+            min-width: 44px; min-height: 44px;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        @media (min-width: 768px) { #menu-toggle { display: none; } }
+        a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+        .fade-in {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        .social-icon {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px; border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.25s ease;
+        }
+        .social-icon:hover {
+            background: var(--accent); color: #0b0f1a;
+            border-color: var(--accent); transform: scale(1.08);
+        }
+
+        .logo-gradient {
+            background: linear-gradient(135deg, #14f1d9 0%, #0ea5e9 50%, #14f1d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-icon-box {
+            width: 50px; height: 50px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            background: rgba(20, 241, 217, 0.08);
+            color: var(--accent);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .contact-item:hover .contact-icon-box {
+            background: var(--accent);
+            color: #0b0f1a;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            color: #e2e8f0;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(20, 241, 217, 0.06); }
+        .form-input::placeholder { color: #4a5568; }
+        textarea.form-input { resize: vertical; min-height: 120px; }
+
+        /* ===== Mobile fit: cegah scroll kiri-kanan, elemen penuh layar ===== */
+        .contact-item { min-width: 0; }
+        .contact-item > div:last-child { min-width: 0; overflow-wrap: anywhere; word-break: break-word; }
+        @media (max-width: 640px) {
+            .contact-item .contact-icon-box { width: 44px; height: 44px; font-size: 1.05rem; }
+            .glass-card { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-card backdrop-blur-lg bg-[rgba(11,15,26,0.80)]">
+        <div class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-16 md:h-20">
+            <a href="index.html" class="flex items-center gap-2 text-xl font-bold tracking-tight">
+                <span class="logo-gradient text-2xl">Jog.DEV</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="index.html" class="nav-link text-slate-400 hover:text-white transition">Beranda</a>
+                <a href="about.html" class="nav-link text-slate-400 hover:text-white transition">Tentang</a>
+                <a href="services.html" class="nav-link text-slate-400 hover:text-white transition">Layanan</a>
+                <a href="portofolio.html" class="nav-link text-slate-400 hover:text-white transition">Portofolio</a>
+                <a href="kontak.html" class="nav-link active text-white">Kontak</a>
+            </nav>
+            <a href="https://wa.me/6285707680724" target="_blank" rel="noopener"
+               class="hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-[#0b0f1a] bg-[#14f1d9] hover:bg-[#0dc2af] transition btn-lift">
+                <i class="fa-regular fa-paper-plane"></i> Diskusi
+            </a>
+            <button id="menu-toggle" class="md:hidden text-slate-300 hover:text-white text-2xl focus:outline-none" aria-label="Buka menu" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="mobile-nav md:hidden bg-[#121726] border-t border-white/5">
+            <div class="flex flex-col gap-1 px-6 pb-6 pt-3">
+                <a href="index.html" class="block py-2 text-slate-400 hover:text-white pl-4 transition">Beranda</a>
+                <a href="about.html" class="block py-2 text-slate-400 hover:text-white pl-4 transition">Tentang</a>
+                <a href="services.html" class="block py-2 text-slate-400 hover:text-white pl-4 transition">Layanan</a>
+                <a href="portofolio.html" class="block py-2 text-slate-400 hover:text-white pl-4 transition">Portofolio</a>
+                <a href="kontak.html" class="block py-2 text-white font-medium border-l-2 border-[#14f1d9] pl-3">Kontak</a>
+                <hr class="border-white/5 my-2" />
+                <a href="https://wa.me/6285707680724" target="_blank" rel="noopener"
+                   class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-[#0b0f1a] bg-[#14f1d9] transition">
+                    <i class="fa-regular fa-paper-plane"></i> Diskusi
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="h-16 md:h-20"></div>
+
+    <!-- ===== PAGE HEADER ===== -->
+    <section class="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 px-5">
+        <div class="absolute top-[-15%] left-[-8%] w-[400px] h-[400px] rounded-full bg-[#14f1d9] opacity-[0.04] blur-[100px] pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-[#14f1d9] bg-[#14f1d9]/10 border border-[#14f1d9]/20 mb-5">
+                <i class="fa-regular fa-paper-plane"></i> Kontak
+            </div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white glow-teal">
+                Hubungi <span class="text-[#14f1d9]">Kami</span>
+            </h1>
+            <p class="mt-4 text-slate-400 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
+                Punya pertanyaan atau ingin diskusi proyek? Kami siap membantu!
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="pb-20 px-5">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-10 md:gap-16">
+
+                <!-- Kiri: Info Kontak -->
+                <div class="space-y-6 fade-in">
+                    <div class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
+                        <div class="contact-icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div class="min-w-0">
+                            <p class="text-xs text-slate-500 uppercase tracking-wider font-medium">WhatsApp</p>
+                            <p class="text-white font-semibold break-words">+62 857-0768-0724</p>
+                        </div>
+                    </div>
+                    <div class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
+                        <div class="contact-icon-box"><i class="fa-regular fa-envelope"></i></div>
+                        <div class="min-w-0">
+                            <p class="text-xs text-slate-500 uppercase tracking-wider font-medium">Email</p>
+                            <p class="text-white font-semibold break-words">dirot224@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
+                        <div class="contact-icon-box"><i class="fa-regular fa-location-dot"></i></div>
+                        <div class="min-w-0">
+                            <p class="text-xs text-slate-500 uppercase tracking-wider font-medium">Lokasi</p>
+                            <p class="text-white font-semibold break-words">Kec. Wiradesa, Kab. Pekalongan, Jawa Tengah</p>
+                        </div>
+                    </div>
+                    <div class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
+                        <div class="contact-icon-box"><i class="fa-regular fa-clock"></i></div>
+                        <div class="min-w-0">
+                            <p class="text-xs text-slate-500 uppercase tracking-wider font-medium">Jam Operasional</p>
+                            <p class="text-white font-semibold break-words">Sen – Sab, 09.00 – 18.00</p>
+                        </div>
+                    </div>
+
+                    <!-- Sosial Media -->
+                    <div class="glass-card rounded-2xl p-5">
+                        <p class="text-sm font-semibold text-white mb-4">Ikuti Kami</p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://www.instagram.com/mysteller_" target="_blank" class="social-icon text-slate-400 text-base" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://wa.me/6285707680724" target="_blank" rel="noopener" class="social-icon text-slate-400 text-base" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                            <a href="https://www.tiktok.com/id-ID/" target="_blank" rel="noopener" class="social-icon text-slate-400 text-base" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                            <a href="#" class="social-icon text-slate-400 text-base" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kanan: Form -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 fade-in">
+                    <h3 class="text-xl font-bold text-white mb-2">Kirim Pesan</h3>
+                    <p class="text-sm text-slate-400 mb-6">Isi form di bawah dan kami akan membalas segera.</p>
+                    <form onsubmit="return sendToWhatsApp(event)">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-slate-300 mb-1.5">Nama Lengkap</label>
+                            <input type="text" id="cf-name" class="form-input" placeholder="Masukkan nama Anda" required />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-slate-300 mb-1.5">Email</label>
+                            <input type="email" id="cf-email" class="form-input" placeholder="contoh@email.com" />
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-slate-300 mb-1.5">Subjek</label>
+                            <input type="text" id="cf-subject" class="form-input" placeholder="Subjek pesan" required />
+                        </div>
+                        <div class="mb-5">
+                            <label class="block text-sm font-medium text-slate-300 mb-1.5">Pesan</label>
+                            <textarea id="cf-message" class="form-input" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full text-base font-semibold text-[#0b0f1a] bg-[#14f1d9] hover:bg-[#0dc2af] transition btn-lift shadow-lg shadow-[#14f1d9]/20">
+                            <i class="fa-regular fa-paper-plane"></i> Kirim Pesan
+                        </button>
+                        <p class="text-center text-xs text-slate-500 mt-3"><i class="fa-brands fa-whatsapp text-[#14f1d9]"></i> Pesan akan otomatis terkirim ke WhatsApp kami.</p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="border-t border-white/5 bg-[#080c14]">
+        <div class="max-w-7xl mx-auto px-5 py-12 md:py-16">
+            <div class="grid md:grid-cols-4 gap-8 text-center md:text-left">
+                <div class="md:col-span-1">
+                    <a href="index.html" class="inline-flex items-center justify-center md:justify-start gap-2 text-xl font-bold tracking-tight mb-3">
+                        <span class="logo-gradient text-2xl">Jog.DEV</span>
+                    </a>
+                    <p class="text-slate-500 text-sm leading-relaxed">Mitra digital terpercaya untuk website impian Anda.</p>
+                    <div class="flex items-center justify-center md:justify-start gap-2 mt-5">
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="social-icon text-slate-400 text-sm" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/6285707680724" target="_blank" rel="noopener" class="social-icon text-slate-400 text-sm" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="https://www.tiktok.com/id-ID/" target="_blank" rel="noopener" class="social-icon text-slate-400 text-sm" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="#" class="social-icon text-slate-400 text-sm" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-white text-sm font-semibold uppercase tracking-wider mb-4">Halaman</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="index.html" class="hover:text-[#14f1d9] transition">Beranda</a></li>
+                        <li><a href="about.html" class="hover:text-[#14f1d9] transition">Tentang</a></li>
+                        <li><a href="services.html" class="hover:text-[#14f1d9] transition">Layanan</a></li>
+                        <li><a href="portofolio.html" class="hover:text-[#14f1d9] transition">Portofolio</a></li>
+                        <li><a href="kontak.html" class="hover:text-[#14f1d9] transition">Kontak</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-sm font-semibold uppercase tracking-wider mb-4">Layanan</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li><a href="services.html" class="hover:text-[#14f1d9] transition">Web Development</a></li>
+                        <li><a href="services.html" class="hover:text-[#14f1d9] transition">Desain UI/UX</a></li>
+                        <li><a href="services.html" class="hover:text-[#14f1d9] transition">SEO & Performa</a></li>
+                        <li><a href="services.html" class="hover:text-[#14f1d9] transition">Maintenance</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white text-sm font-semibold uppercase tracking-wider mb-4">Kontak</h4>
+                    <ul class="space-y-2.5 text-sm text-slate-400">
+                        <li class="flex items-start justify-center md:justify-start gap-2"><i class="fa-regular fa-envelope mt-0.5 text-[#14f1d9]/70"></i> dirot224@gmail.com</li>
+                        <li class="flex items-start justify-center md:justify-start gap-2"><i class="fa-regular fa-building mt-0.5 text-[#14f1d9]/70"></i> Kec. Wiradesa, Kab. Pekalongan, Jawa Tengah</li>
+                        <li class="flex items-start justify-center md:justify-start gap-2"><i class="fa-regular fa-clock mt-0.5 text-[#14f1d9]/70"></i> Sen–Sab, 09.00–18.00</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-white/5 my-8" />
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
+                <p>&copy; 2025 Jog.DEV. All rights reserved.</p>
+                <p class="flex items-center gap-2"><span>Dibuat dengan</span><span class="text-[#14f1d9]"><i class="fa-solid fa-heart"></i></span><span>oleh Jog.DEV</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Back-to-Top (mobile-friendly) -->
+    <button id="back-to-top" aria-label="Kembali ke atas"
+            class="hidden md:hidden fixed bottom-5 right-5 z-40 w-11 h-11 rounded-full text-[#0b0f1a] bg-[#14f1d9] shadow-lg shadow-[#14f1d9]/30 opacity-0 pointer-events-none transition-all duration-300">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            "use strict";
+
+            const toggleBtn = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            let menuOpen = false;
+            if (toggleBtn && mobileMenu) {
+                toggleBtn.addEventListener('click', () => {
+                    menuOpen = !menuOpen;
+                    mobileMenu.classList.toggle('open', menuOpen);
+                    toggleBtn.setAttribute('aria-expanded', menuOpen ? 'true' : 'false');
+                    document.body.style.overflow = menuOpen ? 'hidden' : '';
+                    toggleBtn.innerHTML = menuOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+                });
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        menuOpen = false;
+                        mobileMenu.classList.remove('open');
+                        toggleBtn.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                        toggleBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                    });
+                });
+            }
+
+            const fadeEls = document.querySelectorAll('.fade-in');
+            if (fadeEls.length > 0 && 'IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+                }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+                fadeEls.forEach(el => observer.observe(el));
+            } else { fadeEls.forEach(el => el.classList.add('visible')); }
+
+            // Back to top (mobile)
+            const backToTop = document.getElementById('back-to-top');
+            if (backToTop) {
+                const showBtn = () => {
+                    const show = window.scrollY > 500;
+                    backToTop.classList.toggle('opacity-0', !show);
+                    backToTop.classList.toggle('pointer-events-none', !show);
+                    backToTop.classList.toggle('opacity-100', show);
+                    backToTop.classList.toggle('pointer-events-auto', show);
+                };
+                window.addEventListener('scroll', showBtn, { passive: true });
+                showBtn();
+                backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+            }
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const id = this.getAttribute('href');
+                    if (id === '#') return;
+                    const target = document.querySelector(id);
+                    if (target) {
+                        e.preventDefault();
+                        const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                        window.scrollTo({ top, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            /* ===== Kirim Pesan ke WhatsApp ===== */
+            window.sendToWhatsApp = function(e) {
+                e.preventDefault();
+                const name = document.getElementById('cf-name').value.trim();
+                const email = document.getElementById('cf-email').value.trim();
+                const subject = document.getElementById('cf-subject').value.trim();
+                const message = document.getElementById('cf-message').value.trim();
+
+                if (!name || !subject || !message) {
+                    alert('Mohon lengkapi nama, subjek, dan pesan terlebih dahulu.');
+                    return false;
+                }
+
+                let text = 'Halo Jog.DEV!\n\n';
+                text += 'Nama: ' + name + '\n';
+                if (email) text += 'Email: ' + email + '\n';
+                text += 'Subjek: ' + subject + '\n';
+                text += 'Pesan: ' + message;
+
+                const url = 'https://wa.me/6285707680724?text=' + encodeURIComponent(text);
+                window.open(url, '_blank');
+                return false;
+            };
+        })();
+    </script>
+
+</body>
+</html>

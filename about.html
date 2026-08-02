@@ -171,6 +171,71 @@
             border: 3px solid rgba(20, 241, 217, 0.25);
             box-shadow: 0 0 40px rgba(20, 241, 217, 0.10);
         }
+
+        /* ===== Glass light reflection pada gambar (div image) ===== */
+        .glass-reflect {
+            display: inline-block;
+            position: relative;
+            max-width: 100%;
+            line-height: 0;       /* hilangkan gap bawah image */
+            border-radius: 1rem;
+            overflow: hidden;
+            contain: paint;       /* pastikan blur/efek tidak tembus keluar gambi */
+            isolation: isolate;
+        }
+        .glass-reflect img {
+            display: block;
+        }
+        .glass-reflect::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 72%;          /* pita LEBAH, bukan garis tipis */
+            height: 100%;
+            background: linear-gradient(
+                115deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: translateX(-150%) skewX(-22deg);
+            filter: blur(10px);  /* sisi sangat lembut/blur */
+            pointer-events: none; /* tidak menghalangi klik */
+            opacity: 1;
+            z-index: 2;          /* di atas gambar */
+            animation: glassSweep 2.5s ease-in-out infinite;
+        }
+        @keyframes glassSweep {
+            0%   { transform: translateX(-150%) skewX(-22deg); opacity: 1; }
+            /* sapuan maju cepat ke kanan, jeda hanya pada 18% akhir (pendek) */
+            82%  { transform: translateX(480%)  skewX(-22deg); opacity: 1; }
+            100% { transform: translateX(480%)  skewX(-22deg); opacity: 0; }
+        }
+
+        /* ===== 3D Tilt card CTA (CSS + JS, tanpa Three.js) ===== */
+        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in {
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 2;
+            /* Kilau glossy mengikuti posisi cursor (CSS vars dari JS) */
+            background: radial-gradient(
+                circle at var(--mx, 50%) var(--my, 50%),
+                rgba(20, 241, 217, 0.10) 0%,
+                rgba(20, 241, 217, 0.03) 38%,
+                rgba(255, 255, 255, 0) 68%
+            );
+            mix-blend-mode: screen;
+            opacity: var(--glow, 0);
+            transition: opacity 0.35s ease;
+        }
     </style>
 </head>
 <body>
@@ -269,10 +334,12 @@
 
                 <!-- Kanan: Gambar dengan background transparan -->
                 <div class="fade-in flex justify-center md:justify-start">
-<img src="boim.png"
+                    <div class="glass-reflect">
+                    <img src="boim.png"
                          alt="Jog.DEV — Front-End Web Developer"
                          class="w-full max-w-sm h-auto object-contain rounded-2xl"
                          style="background: transparent;" />
+                    </div>
                 </div>
 
             </div>
@@ -560,26 +627,46 @@
                 fadeElements.forEach(el => el.classList.add('visible'));
             }
 
-            // ── Skill bar animation (animate when visible) ──
-            const skillFills = document.querySelectorAll('.skill-bar-fill');
-            if (skillFills.length > 0 && 'IntersectionObserver' in window) {
-                const skillObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const fill = entry.target;
-                            const width = fill.getAttribute('data-width');
-                            fill.style.width = width;
-                            skillObserver.unobserve(fill);
-                        }
-                    });
-                }, { threshold: 0.5 });
+            // ── Skill bar animation: isi saat terlihat, RESET ke 0% saat keluar ──
+            const skillFills = Array.prototype.slice.call(
+                document.querySelectorAll('.skill-bar-fill')
+            );
 
-                skillFills.forEach(fill => skillObserver.observe(fill));
-            } else {
-                // fallback
-                skillFills.forEach(fill => {
-                    fill.style.width = fill.getAttribute('data-width');
+            // Cari container Tech Stack (induk dari semua skill bar).
+            const firstBar = document.querySelector('.skill-bar-fill');
+            const barsWrap = firstBar ? firstBar.closest('.space-y-6') : null;
+            const skillContainer = barsWrap ? barsWrap.parentElement : null;
+
+            const fillAll = function (width) {
+                skillFills.forEach(function (fill) {
+                    fill.style.width = width;
                 });
+            };
+
+            if (skillFills.length > 0) {
+                if ('IntersectionObserver' in window && skillContainer) {
+                    // Mulai dengan 0% sebelum terlihat
+                    fillAll('0%');
+                    const skillObserver = new IntersectionObserver(function (entries) {
+                        entries.forEach(function (entry) {
+                            if (entry.isIntersecting) {
+                                // User kembali/scrool ke bagian → isi ulang sesuai data-width
+                                skillFills.forEach(function (fill) {
+                                    fill.style.width = fill.getAttribute('data-width');
+                                });
+                            } else {
+                                // User keluar dari bagian → reset ke 0%
+                                fillAll('0%');
+                            }
+                        });
+                    }, { threshold: 0.25 });
+                    skillObserver.observe(skillContainer);
+                } else {
+                    // fallback: isi langsung
+                    skillFills.forEach(function (fill) {
+                        fill.style.width = fill.getAttribute('data-width');
+                    });
+                }
             }
 
             // ── Back to top (mobile) ──
@@ -616,6 +703,9 @@
 
         })();
     </script>
+
+    <!-- 3D Interactive Tilt card CTA (CSS + JS) -->
+    <script src="scripts/tilt.js"></script>
 
 </body>
 </html>

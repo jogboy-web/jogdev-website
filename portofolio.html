@@ -99,6 +99,8 @@
 
         .project-card {
             position: relative; overflow: hidden; border-radius: 1rem;
+            contain: paint;
+            isolation: isolate;
         }
         .project-card .overlay {
             position: absolute; inset: 0;
@@ -108,6 +110,37 @@
         .project-card:hover .overlay { opacity: 0.70; }
         .project-card img { transition: transform 0.6s ease; }
         .project-card:hover img { transform: scale(1.06); }
+
+        /* ===== Glass light reflection (pita cahaya diagonal) ===== */
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 72%;          /* pita LEBAH, bukan garis tipis */
+            height: 100%;
+            background: linear-gradient(
+                115deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: translateX(-150%) skewX(-22deg);
+            filter: blur(10px);  /* sisi sangat lembut/blur */
+            pointer-events: none; /* tidak menghalangi klik */
+            opacity: 1;
+            z-index: 2;          /* di atas gambar */
+            animation: glassSweep 3.2s ease-in-out infinite;
+        }
+        .project-card:hover::before {
+            animation-duration: 1.8s; /* mempercepat saat hover */
+        }
+        @keyframes glassSweep {
+            0%   { transform: translateX(-150%) skewX(-22deg); opacity: 1; }
+            /* sapuan maju cepat ke kanan, jeda hanya pada 18% akhir (pendek) */
+            82%  { transform: translateX(480%)  skewX(-22deg); opacity: 1; }
+            100% { transform: translateX(480%)  skewX(-22deg); opacity: 0; }
+        }
 
         /* Filter button */
         .filter-btn {
@@ -120,6 +153,30 @@
         .filter-btn:hover, .filter-btn.active {
             border-color: var(--accent); color: var(--accent);
             background: rgba(20, 241, 217, 0.06);
+        }
+
+        /* ===== 3D Tilt card CTA (CSS + JS, tanpa Three.js) ===== */
+        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in {
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 2;
+            /* Kilau glossy mengikuti posisi cursor (CSS vars dari JS) */
+            background: radial-gradient(
+                circle at var(--mx, 50%) var(--my, 50%),
+                rgba(20, 241, 217, 0.10) 0%,
+                rgba(20, 241, 217, 0.03) 38%,
+                rgba(255, 255, 255, 0) 68%
+            );
+            mix-blend-mode: screen;
+            opacity: var(--glow, 0);
+            transition: opacity 0.35s ease;
         }
     </style>
 </head>
@@ -584,6 +641,9 @@
 
         })();
     </script>
+
+    <!-- 3D Interactive Tilt card CTA (CSS + JS) -->
+    <script src="scripts/tilt.js"></script>
 
 </body>
 </html>

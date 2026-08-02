@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Layanan — Jog.DEV</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com">
@@ -928,15 +929,21 @@
                     return false;
                 }
 
+                // Metode QRIS: tampilkan dahulu kode QR.
+                // Setelah user berhasil scan & membayar, ia menekan "Konfirmasi via WhatsApp"
+                // yang mengirim data pesanan + bukti ke WA 085707680724 (6285707680724).
                 if (payment === 'QRIS') {
                     showQRIS(pkg, price, name, phone, notes);
                     return false;
                 }
 
+                // Metode lain: sementara tampilkan popup alert saja.
+                // Catatan: pengiriman data OTOMATIS ke WhatsApp tanpa user membuka WA
+                // membutuhkan token / API / backend (WhatsApp Business API) yang belum tersedia.
                 alert('Terima kasih ' + name + '!\n\n' +
                       'Pesanan Anda: ' + pkg + ' (' + price + ')\n' +
                       'Metode pembayaran: ' + payment + '\n' +
-                      'Tim kami akan menghubungi Anda via WhatsApp ' + phone + ' untuk konfirmasi.');
+                      'Data Anda telah kami terima, tim akan segera menghubungi untuk konfirmasi.');
                 closeOrder();
                 e.target.reset();
                 return false;
@@ -972,9 +979,21 @@
                               'Metode: QRIS';
                 document.getElementById('qris-wa-link').href = 'https://wa.me/6285707680724?text=' + encodeURIComponent(waText);
 
+                // QRIS dipakai langsung scan tanpa perlu mengklik WA.
+                // Sembunyikan tombol konfirmasi via WhatsApp pada panel QRIS.
+                var waLink = document.getElementById('qris-wa-link');
+                if (waLink) waLink.style.display = 'none';
+
                 document.getElementById('qris-panel').classList.add('active');
                 document.getElementById('order-overlay').classList.add('open');
                 document.body.style.overflow = 'hidden';
+
+                // Popup ringkas setelah kode QR tampil (pengganti klik "Konfirmasi via WA").
+                alert('Terima kasih ' + name + '!\n\n' +
+                      'Kode QRIS untuk ' + pkg + ' (' + price + ') telah ditampilkan.\n' +
+                      'Silakan scan QRIS dan selesaikan pembayaran.\n' +
+                      'Setelah pembayaran berhasil, pesanan Anda akan kami proses\n' +
+                      'dan tim kami akan menghubungi Anda untuk konfirmasi.');
             };
 
             /* ===== Kembali ke form ===== */

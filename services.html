@@ -217,6 +217,8 @@
             border-radius: 0.7rem; padding: 12px 14px; cursor: pointer; transition: all 0.3s;
         }
         .pm-item:hover { border-color: rgba(20,241,217,0.35); }
+        .pm-item.pm-disabled { pointer-events: none; opacity: 0.45; cursor: not-allowed; }
+        .pm-item.pm-disabled:hover { border-color: rgba(255,255,255,0.09); }
         .pm-item input { position: absolute; opacity: 0; }
         .pm-item:has(input:checked) {
             border-color: var(--accent);
@@ -540,7 +542,7 @@
     <!-- ============================================================ -->
     <!--  PAKET HARGA (PRICING)                                      -->
     <!-- ============================================================ -->
-    <section class="py-16 md:py-20 px-5 bg-[#090d17]">
+    <section id="paket" class="py-16 md:py-20 px-5 bg-[#090d17]">
         <div class="max-w-6xl mx-auto">
 
             <div class="text-center max-w-xl mx-auto mb-14 fade-in">
@@ -549,20 +551,30 @@
                 <p class="mt-3 text-slate-400 text-sm md:text-base">Harga fleksibel untuk setiap skala bisnis.</p>
             </div>
 
+            <!-- Catatan harga fleksibel -->
+            <div class="fade-in mb-8 mx-auto max-w-2xl glass-card rounded-2xl p-5 md:p-6 text-center border border-[#14f1d9]/20 bg-[#14f1d9]/[0.03]">
+                <p class="text-sm md:text-base text-slate-200 leading-relaxed">
+                    <i class="fa-solid fa-circle-info text-[#14f1d9] mr-2"></i>
+                    Harga di bawah <span class="text-[#14f1d9] font-semibold">tidak pasti</span> dan <span class="text-[#14f1d9] font-semibold">dapat menyesuaikan</span> dengan kebutuhan &amp; anggaran Anda.
+                </p>
+                <p class="mt-2 text-xs md:text-sm text-slate-400 leading-relaxed">
+                    Setiap proyek itu unik — silakan ceritakan kebutuhan Anda, nanti kami susunkan <span class="text-white font-medium">harga terbaik yang fleksibel</span> untuk Anda.
+                </p>
+            </div>
+
             <div class="grid md:grid-cols-3 gap-6 md:gap-8">
 
                 <!-- Paket Basic -->
                 <div class="glass-card rounded-2xl p-7 md:p-8 text-center fade-in">
                     <span class="text-xs font-semibold uppercase tracking-wider text-[#14f1d9]">Basic</span>
-                    <h3 class="mt-1 text-3xl font-bold text-white">Mulai <span class="text-[#14f1d9]">Rp 2,5JT</span></h3>
+                    <h3 class="mt-1 text-3xl font-bold text-white">Mulai <span class="text-[#14f1d9]">Rp 250rb</span></h3>
                     <p class="text-xs text-slate-500">Cocok untuk personal / UMKM</p>
                     <hr class="border-white/5 my-6" />
                     <ul class="space-y-3 text-sm text-slate-400 text-left">
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> 1 Halaman (Landing Page)</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Desain Responsif</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Form Kontak</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Hosting 1 Tahun</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Domain .id 1 Tahun</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Deploy Online</li>
                         <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-xmark text-slate-600"></i> SEO Basic</li>
                         <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-xmark text-slate-600"></i> Maintenance</li>
                     </ul>
@@ -570,7 +582,7 @@
                             class="btn-order mt-7 inline-flex items-center justify-center w-full gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white border border-slate-600 hover:border-[#14f1d9] transition btn-lift glass-card"
                             data-package="Basic"
                             data-desc="Cocok untuk personal / UMKM"
-                            data-price="Rp 2.500.000"
+                            data-price="Rp 250.000"
                             onclick="openOrder(this)">
                         <i class="fa-solid fa-cart-shopping"></i> Pilih Paket
                     </button>
@@ -580,53 +592,64 @@
                 <div class="glass-card rounded-2xl p-7 md:p-8 text-center fade-in pricing-featured relative">
                     <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider text-[#0b0f1a] bg-[#14f1d9]">Terpopuler</span>
                     <span class="text-xs font-semibold uppercase tracking-wider text-[#14f1d9]">Pro</span>
-                    <h3 class="mt-1 text-3xl font-bold text-white">Mulai <span class="text-[#14f1d9]">Rp 5,5JT</span></h3>
+                    <h3 class="mt-1 text-3xl font-bold text-white">Mulai <span class="text-[#14f1d9]">Rp 400rb</span></h3>
                     <p class="text-xs text-slate-500">Cocok untuk bisnis berkembang</p>
                     <hr class="border-white/5 my-6" />
                     <ul class="space-y-3 text-sm text-slate-400 text-left">
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Hingga 5 Halaman</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Desain UI/UX Premium</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Integrasi CMS</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Hosting 1 Tahun</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Domain .com 1 Tahun</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Deploy Online</li>
                         <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> SEO On-Page Basic</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> 3 Bulan Maintenance</li>
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-xmark text-slate-600"></i> Maintenance</li>
                     </ul>
                     <button type="button"
                             class="btn-order mt-7 inline-flex items-center justify-center w-full gap-2 px-6 py-3 rounded-full text-sm font-semibold text-[#0b0f1a] bg-[#14f1d9] hover:bg-[#0dc2af] transition btn-lift shadow-lg shadow-[#14f1d9]/20"
                             data-package="Pro"
                             data-desc="Cocok untuk bisnis berkembang"
-                            data-price="Rp 5.500.000"
+                            data-price="Rp 400.000"
                             onclick="openOrder(this)">
                         <i class="fa-solid fa-cart-shopping"></i> Pilih Paket
                     </button>
                 </div>
 
-                <!-- Paket Enterprise -->
-                <div class="glass-card rounded-2xl p-7 md:p-8 text-center fade-in">
-                    <span class="text-xs font-semibold uppercase tracking-wider text-[#14f1d9]">Enterprise</span>
-                    <h3 class="mt-1 text-3xl font-bold text-white">Mulai <span class="text-[#14f1d9]">Rp 12JT</span></h3>
+                <!-- Paket Enterprise (Belum Tersedia) -->
+                <div class="glass-card rounded-2xl p-7 md:p-8 text-center fade-in opacity-50 saturate-0 pointer-events-none select-none relative">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider text-[#0b0f1a] bg-slate-500">Segera Hadir</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Enterprise</span>
+                    <h3 class="mt-1 text-3xl font-bold text-white">Mulai <span class="text-slate-400">Rp 12JT</span></h3>
                     <p class="text-xs text-slate-500">Cocok untuk perusahaan besar</p>
                     <hr class="border-white/5 my-6" />
-                    <ul class="space-y-3 text-sm text-slate-400 text-left">
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Halaman Tak Terbatas</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Desain Kustom & Design System</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Web App / Portal Lengkap</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Hosting & Domain 2 Tahun</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> SEO Komprehensif</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Maintenance 1 Tahun</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-[#14f1d9]"></i> Support Prioritas 24/7</li>
+                    <ul class="space-y-3 text-sm text-slate-500 text-left">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-500"></i> Halaman Tak Terbatas</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-500"></i> Desain Kustom & Design System</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-500"></i> Web App / Portal Lengkap</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-500"></i> Hosting & Domain 2 Tahun</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-500"></i> SEO Komprehensif</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-500"></i> Maintenance 1 Tahun</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-slate-500"></i> Support Prioritas 24/7</li>
                     </ul>
                     <button type="button"
-                            class="btn-order mt-7 inline-flex items-center justify-center w-full gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white border border-slate-600 hover:border-[#14f1d9] transition btn-lift glass-card"
-                            data-package="Enterprise"
-                            data-desc="Cocok untuk perusahaan besar"
-                            data-price="Rp 12.000.000"
-                            onclick="openOrder(this)">
-                        <i class="fa-solid fa-cart-shopping"></i> Pilih Paket
+                            disabled
+                            class="mt-7 inline-flex items-center justify-center w-full gap-2 px-6 py-3 rounded-full text-sm font-semibold text-slate-500 border border-slate-600 cursor-not-allowed opacity-60">
+                        <i class="fa-solid fa-lock"></i> Belum Tersedia
                     </button>
                 </div>
 
+            </div>
+
+            <!-- Belum mau pesan? Lihat karya -->
+            <div class="mt-14 fade-in text-center">
+                <p class="text-slate-300 text-base md:text-lg leading-relaxed max-w-lg mx-auto">
+                    Belum mau pesan? Lihat <span class="text-[#14f1d9] font-semibold">karya kami</span>
+                    dan rasakan langsung kualitas setiap proyek yang telah kami selesaikan.
+                </p>
+                <div class="mt-6">
+                    <a href="portofolio.html"
+                       class="inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-base font-semibold text-white border border-slate-600 hover:border-[#14f1d9] transition btn-lift glass-card">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Karya
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -649,8 +672,8 @@
                         <i class="fa-solid fa-chevron-down text-slate-500 group-open:rotate-180 transition-transform"></i>
                     </summary>
                     <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-                        Tergantung kompleksitas. Landing page selesai dalam 3-5 hari, website company profile 1-2 minggu, 
-                        dan web aplikasi 3-6 minggu.
+                        Tergantung kompleksitas. Landing page selesai dalam 2-3 hari, 
+                        dan website selesai dalam 7-8 hari.
                     </p>
                 </details>
 
@@ -660,7 +683,10 @@
                         <i class="fa-solid fa-chevron-down text-slate-500 group-open:rotate-180 transition-transform"></i>
                     </summary>
                     <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-                        Ya, semua paket sudah termasuk domain dan hosting untuk tahun pertama. Perpanjangan tahun berikutnya dikenakan biaya terpisah.
+                        <strong class="text-slate-200">Tidak.</strong> Biaya domain &amp; hosting <strong class="text-[#14f1d9]">ditanggung sendiri</strong> oleh Anda. Kami hanya menyediakan jasa pembuatan website dan <strong class="text-slate-200">deploy online</strong> ke server yang Anda miliki.
+                    </p>
+                    <p class="mt-3 text-slate-400 text-sm leading-relaxed">
+                        Tidak punya domain/hosting? Tenang — kami bisa bantu uruskan pendaftarannya, silakan tanyakan detail biayanya via WhatsApp.
                     </p>
                 </details>
 
@@ -670,7 +696,7 @@
                         <i class="fa-solid fa-chevron-down text-slate-500 group-open:rotate-180 transition-transform"></i>
                     </summary>
                     <p class="mt-3 text-slate-400 text-sm leading-relaxed">
-                        Tentu! Setiap paket menyertakan 2-3 kali revisi desain. Revisi tambahan dapat dilakukan dengan biaya yang disepakati.
+                        <strong class="text-slate-200">Bebas!</strong> Setiap paket memberikan revisi tanpa batas hingga hasilnya <strong class="text-[#14f1d9]">sesuai dengan yang Anda inginkan</strong>.
                     </p>
                 </details>
             </div>
@@ -793,23 +819,23 @@
                 <div class="pm-grid">
                     <label class="pm-item">
                         <input type="radio" name="payment" value="Transfer Bank" checked />
-                        <span class="pm-icon"><i class="fa-solid fa-money-bill-transfer"></i></span>
+                        <span class="pm-icon"><i class="fa-solid fa-university"></i></span>
                         <span class="pm-text">Transfer Bank<small>BCA · Mandiri · BRI · BNI</small></span>
                     </label>
-                    <label class="pm-item">
-                        <input type="radio" name="payment" value="QRIS" />
+                    <label class="pm-item pm-disabled" title="Segera hadir">
+                        <input type="radio" name="payment" value="QRIS" disabled />
                         <span class="pm-icon"><i class="fa-solid fa-qrcode"></i></span>
-                        <span class="pm-text">QRIS<small>Semua Aplikasi Pembayaran</small></span>
+                        <span class="pm-text">QRIS<small>Segera hadir</small></span>
                     </label>
                     <label class="pm-item">
                         <input type="radio" name="payment" value="E-Wallet" />
                         <span class="pm-icon"><i class="fa-solid fa-mobile-screen-button"></i></span>
                         <span class="pm-text">E-Wallet<small>GoPay · OVO · DANA · ShopeePay</small></span>
                     </label>
-                    <label class="pm-item">
-                        <input type="radio" name="payment" value="Kartu Kredit" />
+                    <label class="pm-item pm-disabled" title="Segera hadir">
+                        <input type="radio" name="payment" value="Kartu Kredit" disabled />
                         <span class="pm-icon"><i class="fa-regular fa-credit-card"></i></span>
-                        <span class="pm-text">Kartu Kredit<small>Visa · Mastercard · JCB</small></span>
+                        <span class="pm-text">Kartu Kredit<small>Segera hadir</small></span>
                     </label>
                 </div>
 
@@ -819,7 +845,7 @@
                 <button type="submit" class="order-submit">
                     <i class="fa-solid fa-bag-shopping"></i> Pesan Sekarang
                 </button>
-                <p class="order-note"><i class="fa-solid fa-circle-info"></i> Setelah pemesanan, tim kami akan menghubungi Anda maksimal 1x24 jam untuk konfirmasi &amp; pembayaran.</p>
+                <p class="order-note"><i class="fa-solid fa-circle-info"></i> Setelah itu, WhatsApp kami akan terbuka dengan data pemesanan yang sudah terisi — tinggal tekan tombol Kirim.</p>
                 <p class="order-note">Anda dapat menghubungi <a href="https://wa.me/6285707680724" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px dashed rgba(20,241,217,0.5);">WhatsApp kami <i class="fa-brands fa-whatsapp"></i></a> untuk permintaan yang lebih jelas.</p>
             </form>
 
@@ -943,6 +969,7 @@
                 const price = document.getElementById('om-price').textContent;
                 const name = (document.getElementById('of-name').value || '').trim();
                 const phone = (document.getElementById('of-phone').value || '').trim();
+                const email = (document.getElementById('of-email').value || '').trim();
                 const notes = (document.getElementById('of-notes').value || '').trim();
                 const payment = document.querySelector('input[name="payment"]:checked').value;
 
@@ -951,21 +978,23 @@
                     return false;
                 }
 
-                // Metode QRIS: tampilkan dahulu kode QR.
-                // Setelah user berhasil scan & membayar, ia menekan "Konfirmasi via WhatsApp"
-                // yang mengirim data pesanan + bukti ke WA 085707680724 (6285707680724).
-                if (payment === 'QRIS') {
-                    showQRIS(pkg, price, name, phone, notes);
-                    return false;
-                }
+                // Susun pesan otomatis untuk dikirim ke WhatsApp.
+                // Saat “Pesan Sekarang” ditekan, buka chat WA 085707680724
+                // dengan data form sudah tersalin, user tinggal tekan Send.
+                let waParts = [
+                    'Halo Jog.DEV! Saya ingin memesan paket webiste.',
+                    '',
+                    'Nama: ' + name,
+                    'No. WhatsApp: ' + phone
+                ];
+                if (email) waParts.push('Email: ' + email);
+                waParts.push('Paket: ' + pkg + ' (' + price + ')');
+                waParts.push('Metode Pembayaran: ' + payment);
+                if (notes) waParts.push('Catatan: ' + notes);
 
-                // Metode lain: sementara tampilkan popup alert saja.
-                // Catatan: pengiriman data OTOMATIS ke WhatsApp tanpa user membuka WA
-                // membutuhkan token / API / backend (WhatsApp Business API) yang belum tersedia.
-                alert('Terima kasih ' + name + '!\n\n' +
-                      'Pesanan Anda: ' + pkg + ' (' + price + ')\n' +
-                      'Metode pembayaran: ' + payment + '\n' +
-                      'Data Anda telah kami terima, tim akan segera menghubungi untuk konfirmasi.');
+                const waUrl = 'https://wa.me/6285707680724?text=' + encodeURIComponent(waParts.join('\n'));
+                window.open(waUrl, '_blank');
+
                 closeOrder();
                 e.target.reset();
                 return false;

@@ -134,12 +134,12 @@
         @media (max-width: 767px) {
             section.hero-bg {
                 background-position: 75% 20% !important;
-                /* Percerah background image hero di mobile */
-                filter: brightness(1.35) saturate(1.05);
+                /* Radialam sedikit kecerahan bg hero di mobile */
+                filter: brightness(0.97) saturate(1.05);
             }
-            /* Kurangi overlay gelap agar gambar hero lebih terang di mobile */
+            /* Tambah sedikit overlay gelap agar bg hero mobile lebih gelap */
             section.hero-bg .hero-overlay {
-                background: rgba(11, 15, 26, 0.55) !important;
+                background: rgba(11, 15, 26, 0.80) !important;
             }
         }
         /* Keyboard focus visibility */
@@ -217,6 +217,28 @@
             pointer-events: none;
             z-index: 2;
             /* Kilau glossy mengikuti posisi cursor (CSS vars dari JS) */
+            background: radial-gradient(
+                circle at var(--mx, 50%) var(--my, 50%),
+                rgba(20, 241, 217, 0.10) 0%,
+                rgba(20, 241, 217, 0.03) 38%,
+                rgba(255, 255, 255, 0) 68%
+            );
+            mix-blend-mode: screen;
+            opacity: var(--glow, 0);
+            transition: opacity 0.35s ease;
+        }
+        /* ===== Glossy generik untuk card (tampil juga di mobile) ===== */
+        .glass-card.rounded-2xl.fade-in {
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        .glass-card.rounded-2xl.fade-in::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 2;
             background: radial-gradient(
                 circle at var(--mx, 50%) var(--my, 50%),
                 rgba(20, 241, 217, 0.10) 0%,

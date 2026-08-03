@@ -35,13 +35,13 @@
     var CONFIG = {
         // Warna utama = warna teks "Website Impian" di h1 (#14f1d9)
         color: '#14f1d9',
-        counts: isMobile ? 260 : 520,          // jumlah partikel (lebih banyak)
-        maxOpacity: isMobile ? 0.55 : 0.75,    // intensitas glow
-        baseSize: isMobile ? 1.8 : 2.4,        // ukuran partikel px
-        speed: isMobile ? 0.30 : 0.50,         // kecepatan drift (lebih cepat, tetap smooth)
-        noiseStrength: isMobile ? 0.004 : 0.006, // noise arah (sedikit naik agar tetap berkelok halus)
-        parallaxStrength: isMobile ? 12 : 26,  // follow mouse
-        orbitPoints: isMobile ? 16 : 26        // titik cahaya glow (bloom lembut)
+        counts: isMobile ? 620 : 850,          // jumlah partikel (semua media query diperbanyak)
+        maxOpacity: isMobile ? 0.90 : 0.75,    // intensitas glow
+        baseSize: isMobile ? 2.8 : 2.4,        // ukuran partikel px
+        speed: isMobile ? 0.48 : 0.50,         // kecepatan drift (lebih cepat, tetap smooth)
+        noiseStrength: isMobile ? 0.006 : 0.006, // noise arah (sedikit naik agar tetap berkelok halus)
+        parallaxStrength: isMobile ? 20 : 26,  // follow mouse
+        orbitPoints: isMobile ? 22 : 26        // titik cahaya glow (bloom lembut)
     };
 
     // ── Tekstur partikel BULAT (bukan kotak) ──
@@ -294,11 +294,11 @@
         geometry.userData.theta = theta;
 
         var material = new THREE.PointsMaterial({
-            size: isMobile ? 5 : 8,
+            size: isMobile ? 6 : 8,
             map: particleTexture,       // tekstur bulat -> tidak tampil kotak
             vertexColors: true,
             transparent: true,
-            opacity: isMobile ? 0.18 : 0.30,
+            opacity: isMobile ? 0.28 : 0.30,
             blending: THREE.AdditiveBlending,
             depthWrite: false,
             sizeAttenuation: true,
@@ -338,7 +338,7 @@
         geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
         var material = new THREE.PointsMaterial({
-            size: isMobile ? 10 : 16,        // blob cahaya lembut
+            size: isMobile ? 14 : 16,        // blob cahaya lembut
             map: particleTexture,
             vertexColors: true,
             transparent: true,
@@ -368,13 +368,13 @@
         if (mobileNow !== isMobile) {
             isMobile = mobileNow;
             // perbarui nilai CONFIG yang peka terhadap mode
-            CONFIG.counts = isMobile ? 260 : 520;
-            CONFIG.maxOpacity = isMobile ? 0.55 : 0.75;
-            CONFIG.baseSize = isMobile ? 1.8 : 2.4;
-            CONFIG.orbitPoints = isMobile ? 16 : 26;
-            CONFIG.parallaxStrength = isMobile ? 12 : 26;
-            CONFIG.speed = isMobile ? 0.30 : 0.50;
-            CONFIG.noiseStrength = isMobile ? 0.004 : 0.006;
+            CONFIG.counts = isMobile ? 620 : 850;
+            CONFIG.maxOpacity = isMobile ? 0.90 : 0.75;
+            CONFIG.baseSize = isMobile ? 2.8 : 2.4;
+            CONFIG.orbitPoints = isMobile ? 22 : 26;
+            CONFIG.parallaxStrength = isMobile ? 20 : 26;
+            CONFIG.speed = isMobile ? 0.48 : 0.50;
+            CONFIG.noiseStrength = isMobile ? 0.006 : 0.006;
             dprLimit = isMobile ? 1.2 : 2;
             rebuildAll();
             return;
@@ -495,7 +495,7 @@
 
             // Pulsasi opacity: menyala di tengah, meredup sebelum reset
             var bright = Math.sin(sweepOffset * Math.PI);  // 0 -> 1 -> 0
-            sweep.material.opacity = bright * (isMobile ? 0.22 : 0.38);
+            sweep.material.opacity = bright * (isMobile ? 0.30 : 0.38);
         }
 
         renderer.render(scene, camera);

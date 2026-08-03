@@ -333,6 +333,28 @@
             opacity: var(--glow, 0);
             transition: opacity 0.35s ease;
         }
+        /* ===== Glossy generik untuk card (tampil juga di mobile) ===== */
+        .glass-card.rounded-2xl.fade-in {
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        .glass-card.rounded-2xl.fade-in::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 2;
+            background: radial-gradient(
+                circle at var(--mx, 50%) var(--my, 50%),
+                rgba(20, 241, 217, 0.10) 0%,
+                rgba(20, 241, 217, 0.03) 38%,
+                rgba(255, 255, 255, 0) 68%
+            );
+            mix-blend-mode: screen;
+            opacity: var(--glow, 0);
+            transition: opacity 0.35s ease;
+        }
     </style>
 </head>
 <body>

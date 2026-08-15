@@ -1,2 +1,4 @@
 # Cloudflare Wrangler local state
 .wrangler/
+__pycache__/
+*.pyc

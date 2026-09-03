@@ -325,9 +325,14 @@
     <!--  HERO SECTION                                               -->
     <!-- ============================================================ -->
     <section id="hero" class="hero-bg relative overflow-hidden pt-10 pb-20 md:pt-20 md:pb-32 px-5">
-        <!-- Video Background (Desktop & Tablet: sm:block hidden) -->
-        <video id="hero-video" autoplay loop muted playsinline preload="auto" class="hidden sm:block absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
+        <!-- Video Background Desktop & Tablet (>= 640px) -->
+        <video id="hero-video-desktop" autoplay loop muted playsinline preload="auto" class="hidden sm:block absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
             <source src="videos/0902.mp4" type="video/mp4">
+        </video>
+
+        <!-- Video Background Mobile (< 640px) -->
+        <video id="hero-video-mobile" autoplay loop muted playsinline preload="auto" class="block sm:hidden absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
+            <source src="videos/0903.mp4" type="video/mp4">
         </video>
 
         <!-- Overlay transparan agar teks tetap terbaca & video jernih -->
@@ -683,11 +688,13 @@
 
     <script>
         (function() {
-            var v = document.getElementById('hero-video');
-            if (v) {
-                v.muted = true;
-                v.play().catch(function() {});
-            }
+            ['hero-video-desktop', 'hero-video-mobile'].forEach(function(id) {
+                var v = document.getElementById(id);
+                if (v) {
+                    v.muted = true;
+                    v.play().catch(function() {});
+                }
+            });
         })();
     </script>
 </body>

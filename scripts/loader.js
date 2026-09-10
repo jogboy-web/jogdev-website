@@ -96,7 +96,7 @@
             border: 2.5px solid #14f1d9;
             pointer-events: none;
             z-index: 10;
-            animation: jdevCircleReveal 1.6s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+            animation: jdevCircleReveal 0.45s cubic-bezier(0.15, 0.9, 0.25, 1) forwards;
         }
     `;
 
@@ -131,10 +131,11 @@
         var quickRing = document.createElement('div');
         quickRing.className = 'jdev-reveal-ring';
         loader.appendChild(quickRing);
-
+        // Tunggu lingkaran membuka penuh (layar index full 450ms), lalu bersihkan loader dan mulai animasi
         setTimeout(function () {
             loader.remove();
-        }, 1650);
+            document.dispatchEvent(new CustomEvent('jdev:loader-exit'));
+        }, 450);
         return;
     }
 
@@ -144,16 +145,15 @@
         var term = document.getElementById('terminal-output');
         if (term) term.textContent = "> ready.";
 
-        // Fase 2: Selesai loading -> fade out logo & teks di tengah
+        // Fase 2: Selesai loading -> cepat fade out logo & teks di tengah (180ms)
         setTimeout(function () {
             var center = document.getElementById('jdev-center-content');
             var decor = document.getElementById('jdev-decor');
             if (center) center.classList.add('fade-out');
             if (decor) decor.style.opacity = '0';
 
-            // Fase 3: Munculkan lingkaran dari titik dan membesar perlahan memenuhi layar
+            // Fase 3: Munculkan lingkaran transisi pembuka (100ms)
             setTimeout(function () {
-                // Hapus background solid loader agar lubang lingkaran tembus ke halaman index
                 loader.style.background = 'transparent';
                 loader.style.pointerEvents = 'none';
 
@@ -161,11 +161,13 @@
                 ring.className = 'jdev-reveal-ring';
                 loader.appendChild(ring);
 
-                // Fase 4: Setelah lingkaran memenuhi seluruh layar, bersihkan loader dari DOM
+                // Fase 4: TEPAT SAAT LINGKARAN SELESAI & LAYAR INDEX SUDAH FULL (450ms),
+                // bersihkan loader dan jalankan seluruh animasi konten tanpa jeda!
                 setTimeout(function () {
                     loader.remove();
-                }, 1650);
-            }, 300);
-        }, 800);
-    }, 1200);
+                    document.dispatchEvent(new CustomEvent('jdev:loader-exit'));
+                }, 450);
+            }, 100);
+        }, 180);
+    }, 550);
 })();

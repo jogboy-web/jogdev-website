@@ -63,8 +63,25 @@
             var last = performance.now();
             var pressed = false;
             var rafId = null;
+            // Sinkronisasi dengan AOS: jangan timpa transform jika animasi AOS belum selesai
+            var aosDone = !card.hasAttribute('data-aos') || card.classList.contains('aos-animate');
+            if (!aosDone) {
+                card.addEventListener('transitionend', function onAosEnd(e) {
+                    if (e.propertyName === 'transform' || e.propertyName === 'opacity') {
+                        aosDone = true;
+                        card.removeEventListener('transitionend', onAosEnd);
+                    }
+                });
+            }
 
             function tick(now) {
+                if (!aosDone) {
+                    if (card.classList.contains('aos-animate')) {
+                        setTimeout(function () { aosDone = true; }, 800);
+                    }
+                    rafId = requestAnimationFrame(tick);
+                    return;
+                }
                 var dt = (now - last) / 1000;
                 last = now;
                 var t = now / 1000;
@@ -160,7 +177,6 @@
 
             card.style.willChange = 'transform';
             card.style.transformStyle = 'preserve-3d';
-            card.style.transition = 'box-shadow 0.4s ease';
             card.style.setProperty('--mx', '50');
             card.style.setProperty('--my', '50');
 
@@ -263,7 +279,7 @@
 
     // 1) Card CTA banner (tilt/float lebih besar & jelas)
     init(
-        '.max-w-4xl.glass-card.rounded-3xl.text-center.fade-in',
+        '.max-w-4xl.glass-card.rounded-3xl.text-center.fade-in, .max-w-4xl.glass-card.rounded-3xl.text-center[data-aos]',
         { maxTilt: 9, translateZ: 14, scale: 1.02 },
         { floatAmp: 8, floatSpeed: 1.6, glowAmp: 0.9 }
     );
@@ -277,7 +293,7 @@
 
     // 3) Card kontak (info items & form) — berlaku juga di mobile.
     init(
-        '.glass-card.rounded-2xl.fade-in, .contact-item.glass-card',
+        '.glass-card.rounded-2xl.fade-in, .glass-card.rounded-2xl[data-aos], .contact-item.glass-card',
         { maxTilt: 3, translateZ: 5, scale: 1.008 },
         { floatAmp: 3.5, floatSpeed: 1.3, glowAmp: 0.55 }
     );

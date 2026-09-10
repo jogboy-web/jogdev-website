@@ -21,6 +21,8 @@
     </script>
     <!-- Font Awesome 6 (Gratis) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!-- Three.js (efek partikel cahaya hero Jog.DEV) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -227,11 +229,13 @@
         }
 
         /* ===== 3D Tilt card CTA (CSS + JS, tanpa Three.js) ===== */
-        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in {
+        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in,
+        .max-w-4xl.glass-card.rounded-3xl.text-center[data-aos] {
             transform-style: preserve-3d;
             will-change: transform;
         }
-        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in::before {
+        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in::before,
+        .max-w-4xl.glass-card.rounded-3xl.text-center[data-aos]::before {
             content: "";
             position: absolute;
             inset: 0;
@@ -250,11 +254,13 @@
             transition: opacity 0.35s ease;
         }
         /* ===== Glossy generik untuk card (tampil juga di mobile) ===== */
-        .glass-card.rounded-2xl.fade-in {
+        .glass-card.rounded-2xl.fade-in,
+        .glass-card.rounded-2xl[data-aos] {
             position: relative;
             transform-style: preserve-3d;
         }
-        .glass-card.rounded-2xl.fade-in::before {
+        .glass-card.rounded-2xl.fade-in::before,
+        .glass-card.rounded-2xl[data-aos]::before {
             content: "";
             position: absolute;
             inset: 0;
@@ -270,6 +276,18 @@
             mix-blend-mode: screen;
             opacity: var(--glow, 0);
             transition: opacity 0.35s ease;
+        }
+        /* Pastikan animasi AOS selalu mulus dan tidak terpotong */
+        [data-aos^="fade"],
+        [data-aos^="flip"],
+        [data-aos^="zoom"] {
+            transition-property: opacity, transform, box-shadow !important;
+        }
+        [data-aos^="flip"] {
+            opacity: 0;
+        }
+        [data-aos^="flip"].aos-animate {
+            opacity: 1;
         }
     </style>
 </head>
@@ -287,19 +305,20 @@
         <div class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-16 md:h-20">
 
             <!-- Logo -->
-            <a href="#" class="flex items-center gap-2 text-xl font-bold tracking-tight">
+            <a href="#" data-aos="fade-up-right" class="flex items-center gap-2 text-xl font-bold tracking-tight">
                 <span class="logo-gradient text-2xl">Jog.DEV</span>
             </a>
 
             <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="#" class="nav-link active text-white">Beranda</a>
-                <a href="about.html" class="nav-link text-slate-400 hover:text-white transition">Tentang</a>
-                <a href="services.html" class="nav-link text-slate-400 hover:text-white transition">Layanan</a>
-                <a href="portofolio.html" class="nav-link text-slate-400 hover:text-white transition">Portofolio</a>
-                <a href="kontak.html" class="nav-link text-slate-400 hover:text-white transition">Kontak</a>
-            </nav>
-
+            <div data-aos="fade-down" class="hidden md:block">
+                <nav class="flex items-center gap-8 text-sm font-medium">
+                    <a href="#" class="nav-link active text-white">Beranda</a>
+                    <a href="about.html" class="nav-link text-slate-400 hover:text-white transition">Tentang</a>
+                    <a href="services.html" class="nav-link text-slate-400 hover:text-white transition">Layanan</a>
+                    <a href="portofolio.html" class="nav-link text-slate-400 hover:text-white transition">Portofolio</a>
+                    <a href="kontak.html" class="nav-link text-slate-400 hover:text-white transition">Kontak</a>
+                </nav>
+            </div>
             <!-- CTA small (desktop) -->
             <a href="https://wa.me/6285707680724" target="_blank" rel="noopener"
                class="hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-[#0b0f1a] bg-[#14f1d9] hover:bg-[#0dc2af] transition btn-lift">
@@ -358,13 +377,13 @@
                 </div>
 
                 <!-- Headline -->
-                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight text-white hero-title-shadow">
+                <h1 data-aos="fade-down" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight text-white hero-title-shadow">
                     Kami Wujudkan <br class="sm:hidden" />
                     <span class="text-[#14f1d9]">Website Impian</span> Anda
                 </h1>
 
                 <!-- Subtext -->
-                <p class="mt-6 text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto leading-relaxed hero-sub-shadow">
+                <p data-aos="fade-up" class="mt-6 text-base sm:text-lg md:text-xl text-white max-w-2xl mx-auto leading-relaxed hero-sub-shadow">
                     Dari konsep hingga peluncuran — kami membangun website modern, cepat, responsif,
                     dan dirancang untuk mengembangkan bisnis Anda. <span class="text-white/90 font-medium">#DigitalDenganGaya</span>
                 </p>
@@ -372,10 +391,12 @@
                 <!-- CTA Buttons -->
                 <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
                     <a href="about.html"
+                       data-aos="fade-right"
                        class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full text-base font-semibold text-white border border-slate-600 hover:border-[#14f1d9] hover:text-[#14f1d9] transition btn-lift glass-card">
                         <i class="fa-regular fa-user"></i> Siapa Kami
                     </a>
                     <a href="portofolio.html"
+                       data-aos="fade-left"
                        class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-full text-base font-semibold text-[#0b0f1a] bg-[#14f1d9] hover:bg-[#0dc2af] transition btn-lift shadow-lg shadow-[#14f1d9]/20">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Proyek
                     </a>
@@ -383,7 +404,7 @@
 
                 <!-- 3 Poin Keunggulan Ringkas & Presisi Sejajar -->
                 <div id="hero-trust-cards" class="mt-10 flex flex-col sm:grid sm:grid-cols-3 gap-3 items-center justify-center max-w-2xl mx-auto px-4">
-                    <div class="glass-card w-[215px] sm:w-auto rounded-xl px-4 sm:px-3.5 py-2.5 flex items-center justify-start sm:justify-center gap-2.5 border border-slate-600 hover:border-[#14f1d9] transition shadow-md shadow-black/30">
+                    <div data-aos="fade-up-right" class="glass-card w-[215px] sm:w-auto rounded-xl px-4 sm:px-3.5 py-2.5 flex items-center justify-start sm:justify-center gap-2.5 border border-slate-600 hover:border-[#14f1d9] transition shadow-md shadow-black/30">
                         <div class="w-7 h-7 rounded-lg bg-[#14f1d9]/10 border border-[#14f1d9]/20 flex items-center justify-center text-[#14f1d9] text-xs shrink-0">
                             <i class="fa-solid fa-check"></i>
                         </div>
@@ -392,7 +413,7 @@
                             <div>Banyak Bisnis</div>
                         </div>
                     </div>
-                    <div class="glass-card w-[215px] sm:w-auto rounded-xl px-4 sm:px-3.5 py-2.5 flex items-center justify-start sm:justify-center gap-2.5 border border-slate-600 hover:border-[#14f1d9] transition shadow-md shadow-black/30">
+                    <div data-aos="fade-up" class="glass-card w-[215px] sm:w-auto rounded-xl px-4 sm:px-3.5 py-2.5 flex items-center justify-start sm:justify-center gap-2.5 border border-slate-600 hover:border-[#14f1d9] transition shadow-md shadow-black/30">
                         <div class="w-7 h-7 rounded-lg bg-[#14f1d9]/10 border border-[#14f1d9]/20 flex items-center justify-center text-[#14f1d9] text-xs shrink-0">
                             <i class="fa-solid fa-bolt"></i>
                         </div>
@@ -401,7 +422,7 @@
                             <div>&amp; Cepat</div>
                         </div>
                     </div>
-                    <div class="glass-card w-[215px] sm:w-auto rounded-xl px-4 sm:px-3.5 py-2.5 flex items-center justify-start sm:justify-center gap-2.5 border border-slate-600 hover:border-[#14f1d9] transition shadow-md shadow-black/30">
+                    <div data-aos="fade-up-left" class="glass-card w-[215px] sm:w-auto rounded-xl px-4 sm:px-3.5 py-2.5 flex items-center justify-start sm:justify-center gap-2.5 border border-slate-600 hover:border-[#14f1d9] transition shadow-md shadow-black/30">
                         <div class="w-7 h-7 rounded-lg bg-[#14f1d9]/10 border border-[#14f1d9]/20 flex items-center justify-center text-[#14f1d9] text-xs shrink-0">
                             <i class="fa-solid fa-headset"></i>
                         </div>
@@ -427,7 +448,7 @@
     <section class="py-16 md:py-24 px-5 bg-[#090d17]">
         <div class="max-w-7xl mx-auto">
 
-            <div class="text-center max-w-xl mx-auto mb-14 fade-in">
+            <div data-aos="fade-down" class="text-center max-w-xl mx-auto mb-14">
                 <span class="text-xs font-semibold uppercase tracking-widest text-[#14f1d9]">Mengapa Kami</span>
                 <h2 class="mt-3 text-3xl md:text-4xl font-bold text-white">Mengapa Memilih <span class="text-[#14f1d9]">Jog.DEV</span>?</h2>
                 <p class="mt-3 text-slate-400 text-sm md:text-base">
@@ -437,7 +458,7 @@
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                <div class="glass-card rounded-2xl p-6 md:p-7 text-center fade-in">
+                <div data-aos="fade-right" data-aos-duration="500" data-aos-easing="ease-out-cubic" class="glass-card rounded-2xl p-6 md:p-7 text-center">
                     <div class="w-14 h-14 rounded-2xl bg-[#14f1d9]/10 flex items-center justify-center text-[#14f1d9] text-2xl mx-auto mb-4">
                         <i class="fa-solid fa-code"></i>
                     </div>
@@ -447,7 +468,7 @@
                     </p>
                 </div>
 
-                <div class="glass-card rounded-2xl p-6 md:p-7 text-center fade-in">
+                <div data-aos="zoom-out-up" data-aos-duration="500" data-aos-easing="ease-out-cubic" class="glass-card rounded-2xl p-6 md:p-7 text-center">
                     <div class="w-14 h-14 rounded-2xl bg-[#14f1d9]/10 flex items-center justify-center text-[#14f1d9] text-2xl mx-auto mb-4">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
@@ -457,7 +478,7 @@
                     </p>
                 </div>
 
-                <div class="glass-card rounded-2xl p-6 md:p-7 text-center fade-in">
+                <div data-aos="zoom-out-up" data-aos-duration="500" data-aos-easing="ease-out-cubic" class="glass-card rounded-2xl p-6 md:p-7 text-center">
                     <div class="w-14 h-14 rounded-2xl bg-[#14f1d9]/10 flex items-center justify-center text-[#14f1d9] text-2xl mx-auto mb-4">
                         <i class="fa-solid fa-pen-ruler"></i>
                     </div>
@@ -467,7 +488,7 @@
                     </p>
                 </div>
 
-                <div class="glass-card rounded-2xl p-6 md:p-7 text-center fade-in">
+                <div data-aos="fade-left" data-aos-duration="500" data-aos-easing="ease-out-cubic" class="glass-card rounded-2xl p-6 md:p-7 text-center">
                     <div class="w-14 h-14 rounded-2xl bg-[#14f1d9]/10 flex items-center justify-center text-[#14f1d9] text-2xl mx-auto mb-4">
                         <i class="fa-solid fa-headset"></i>
                     </div>
@@ -485,7 +506,7 @@
     <!--  CTA BANNER (sebelum footer)                                -->
     <!-- ============================================================ -->
     <section class="py-16 px-5">
-        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-14 text-center fade-in"
+        <div data-aos="zoom-in-up" data-aos-duration="550" data-aos-easing="ease-out-cubic" class="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-14 text-center"
              style="border-color: rgba(20,241,217,0.15);">
             <a href="services.html"
                class="inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-base font-semibold text-[#0b0f1a] bg-[#14f1d9] hover:bg-[#0dc2af] transition btn-lift shadow-lg shadow-[#14f1d9]/20 mb-6">
@@ -731,6 +752,24 @@
                 }
             });
         })();
+    </script>
+    <!-- AOS (Animate On Scroll) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        var hasLoader = !!document.getElementById('jdev-loader');
+        AOS.init({
+            duration: 500,
+            easing: 'ease-out-cubic',
+            offset: 40,
+            startEvent: hasLoader ? 'jdev:loader-exit' : 'DOMContentLoaded'
+        });
+
+        if (hasLoader) {
+            // Fallback pengaman jika event loader terlewat
+            setTimeout(function () {
+                document.dispatchEvent(new CustomEvent('jdev:loader-exit'));
+            }, 4500);
+        }
     </script>
 </body>
 </html>

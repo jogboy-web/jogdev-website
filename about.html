@@ -226,11 +226,13 @@
         }
 
         /* ===== 3D Tilt card CTA (CSS + JS, tanpa Three.js) ===== */
-        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in {
+        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in,
+        .max-w-4xl.glass-card.rounded-3xl.text-center[data-aos] {
             transform-style: preserve-3d;
             will-change: transform;
         }
-        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in::before {
+        .max-w-4xl.glass-card.rounded-3xl.text-center.fade-in::before,
+        .max-w-4xl.glass-card.rounded-3xl.text-center[data-aos]::before {
             content: "";
             position: absolute;
             inset: 0;
@@ -249,11 +251,13 @@
             transition: opacity 0.35s ease;
         }
         /* ===== Glossy generik untuk card (tampil juga di mobile) ===== */
-        .glass-card.rounded-2xl.fade-in {
+        .glass-card.rounded-2xl.fade-in,
+        .glass-card.rounded-2xl[data-aos] {
             position: relative;
             transform-style: preserve-3d;
         }
-        .glass-card.rounded-2xl.fade-in::before {
+        .glass-card.rounded-2xl.fade-in::before,
+        .glass-card.rounded-2xl[data-aos]::before {
             content: "";
             position: absolute;
             inset: 0;
@@ -346,24 +350,29 @@
                     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-[#14f1d9] bg-[#14f1d9]/10 border border-[#14f1d9]/20 mb-5">
                         <i class="fa-solid fa-user-astronaut"></i> Tentang Saya
                     </div>
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white glow-teal leading-tight">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white glow-teal leading-tight"
+                        data-aos="fade-right">
                         Halo, Saya <span class="logo-gradient">Jog.DEV</span>
                     </h1>
-                    <p class="mt-4 text-slate-400 text-sm md:text-base max-w-xl leading-relaxed">
+                    <p class="mt-4 text-slate-400 text-sm md:text-base max-w-xl leading-relaxed"
+                       data-aos="fade-right">
                         Seorang <strong class="text-white">Front-End Web Developer</strong> yang memiliki semangat 
                         untuk menciptakan website modern, responsif, dan berkualitas tinggi.
                     </p>
-                    <p class="mt-3 text-slate-400 text-sm md:text-base max-w-xl leading-relaxed">
+                    <p class="mt-3 text-slate-400 text-sm md:text-base max-w-xl leading-relaxed"
+                       data-aos="fade-right">
                         Saya percaya bahwa setiap website adalah representasi dari sebuah bisnis atau 
                         personal brand, sehingga setiap detail harus dirancang dengan baik agar memberikan 
                         pengalaman terbaik bagi penggunanya.
                     </p>
                     <div class="mt-7 flex flex-wrap gap-4 justify-center md:justify-start">
                         <a href="https://github.com/jogboy-web" target="_blank" rel="noopener"
+                           data-aos="fade-up"
                            class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-[#0b0f1a] bg-[#14f1d9] hover:bg-[#0dc2af] transition btn-lift shadow-lg shadow-[#14f1d9]/20">
                             <i class="fa-brands fa-github"></i> GitHub
                         </a>
                         <a href="mailto:dirot224@gmail.com"
+                           data-aos="fade-up"
                            class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white border border-slate-600 hover:border-[#14f1d9] transition btn-lift glass-card">
                             <i class="fa-regular fa-envelope"></i> Kontak
                         </a>
@@ -375,6 +384,7 @@
                     <div class="glass-reflect">
                     <img src="boim.png"
                          alt="Jog.DEV — Front-End Web Developer"
+                         data-aos="fade-left"
                          class="w-full max-w-sm h-auto object-contain rounded-2xl"
                          style="background: transparent;" />
                     </div>
@@ -393,15 +403,15 @@
 
                 <!-- Kiri: Bio panjang -->
                 <div class="fade-in">
-                    <span class="text-xs font-semibold uppercase tracking-widest text-[#14f1d9]">Siapa Saya</span>
-                    <h2 class="mt-2 text-2xl md:text-3xl font-bold text-white">Mewujudkan Ide Menjadi Website yang Modern</h2>
-                    <p class="mt-4 text-slate-400 text-sm leading-relaxed">
+                    <span class="text-xs font-semibold uppercase tracking-widest text-[#14f1d9]" data-aos="fade-up-right">Siapa Saya</span>
+                    <h2 class="mt-2 text-2xl md:text-3xl font-bold text-white" data-aos="fade-up-right">Mewujudkan Ide Menjadi Website yang Modern</h2>
+                    <p class="mt-4 text-slate-400 text-sm leading-relaxed" data-aos="fade-up-right">
                         Saya <strong class="text-white">Jog.DEV</strong>, seorang Front-End Web Developer yang 
                         berfokus pada pembuatan website dengan performa tinggi, desain yang responsif, 
                         dan kode yang bersih. Setiap proyek adalah kanvas bagi saya untuk menuangkan 
                         kreativitas dan keahlian teknis.
                     </p>
-                    <p class="mt-4 text-slate-400 text-sm leading-relaxed">
+                    <p class="mt-4 text-slate-400 text-sm leading-relaxed" data-aos="fade-up-right">
                         Dengan pengalaman di berbagai teknologi web modern seperti 
                         <span class="text-[#14f1d9]">React</span>, 
                         <span class="text-[#14f1d9]">Next.js</span>, 
@@ -410,7 +420,7 @@
                         saya siap membantu mewujudkan website impian Anda, 
                         dari landing page sederhana hingga aplikasi web yang kompleks.
                     </p>
-                    <p class="mt-4 text-slate-400 text-sm leading-relaxed">
+                    <p class="mt-4 text-slate-400 text-sm leading-relaxed" data-aos="fade-up-right">
                         Prinsip kerja saya: <span class="text-white">kode yang rapi</span>, 
                         <span class="text-white">desain yang intuitif</span>, dan 
                         <span class="text-white">pengalaman pengguna yang maksimal</span>. 
@@ -419,24 +429,24 @@
                     </p>
 
                     <!-- Stat mini -->
-                    <div class="fade-in" style="display:flex; flex-direction:row; justify-content:space-around; align-items:center; gap:16px; width:100%;">
-                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; flex:1; min-width:0; text-align:center;">
-                            <span class="text-2xl font-bold text-white">Handal</span>
-                            <span class="text-xs text-slate-500">Pengalaman nyata</span>
+                    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                        <div class="glass-card rounded-2xl p-5 text-center" data-aos="fade-up-right">
+                            <span class="block text-lg font-bold text-white">Handal</span>
+                            <span class="mt-1 block text-xs text-slate-500">Pengalaman nyata</span>
                         </div>
-                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; flex:1; min-width:0; text-align:center;">
-                            <span class="text-2xl font-bold text-white">Tepat Waktu</span>
-                            <span class="text-xs text-slate-500">Konsisten &amp; terukur</span>
+                        <div class="glass-card rounded-2xl p-5 text-center" data-aos="zoom-in-up">
+                            <span class="block text-lg font-bold text-white">Tepat Waktu</span>
+                            <span class="mt-1 block text-xs text-slate-500">Konsisten &amp; terukur</span>
                         </div>
-                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; flex:1; min-width:0; text-align:center;">
-                            <span class="text-2xl font-bold text-white">Terpercaya</span>
-                            <span class="text-xs text-slate-500">Klien puas &amp; direkomendasikan</span>
+                        <div class="glass-card rounded-2xl p-5 text-center" data-aos="fade-up-left">
+                            <span class="block text-lg font-bold text-white">Terpercaya</span>
+                            <span class="mt-1 block text-xs text-slate-500">Klien puas &amp; direkomendasikan</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Kanan: Skill bars -->
-                <div class="fade-in">
+                <div data-aos="fade-up-left">
                     <span class="text-xs font-semibold uppercase tracking-widest text-[#14f1d9]">Keahlian</span>
                     <h3 class="mt-2 text-2xl md:text-3xl font-bold text-white">Tech Stack</h3>
 
@@ -504,7 +514,8 @@
     <!--  MOTTO / QUOTE                                              -->
     <!-- ============================================================ -->
     <section class="py-16 px-5">
-        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-10 md:p-16 text-center fade-in"
+        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-10 md:p-16 text-center"
+             data-aos="zoom-in-up"
              style="border-color: rgba(20,241,217,0.12);">
             <i class="fa-solid fa-quote-left text-4xl text-[#14f1d9]/20 block mb-6"></i>
             <blockquote class="text-xl md:text-2xl text-white font-light leading-relaxed italic">
@@ -519,7 +530,8 @@
     <!--  CTA BANNER                                                 -->
     <!-- ============================================================ -->
     <section class="pb-16 px-5">
-        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-14 text-center fade-in"
+        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-14 text-center"
+             data-aos="zoom-in-up"
              style="border-color: rgba(20,241,217,0.15);">
             <p class="text-slate-300 text-base md:text-lg leading-relaxed max-w-lg mx-auto">
                 Mulai tertarik? Coba lihat <span class="text-[#14f1d9] font-semibold">paket yang kami sediakan</span>

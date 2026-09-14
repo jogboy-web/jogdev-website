@@ -286,7 +286,7 @@
 
     // 2) Card paket harga (tilt/float lebih kecil)
     init(
-        '[class~="p-7"].glass-card.rounded-2xl.text-center.fade-in',
+        '[class~="p-7"].glass-card.rounded-2xl.text-center.fade-in, [class~="p-7"].glass-card.rounded-2xl.text-center[data-aos]',
         { maxTilt: 4, translateZ: 6, scale: 1.015 },
         { floatAmp: 5, floatSpeed: 1.4, glowAmp: 0.7 }
     );

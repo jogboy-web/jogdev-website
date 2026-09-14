@@ -148,11 +148,13 @@
 
         /* ===== Glossy kilau untuk card kontak (aktif di desktop & mobile) ===== */
         .glass-card.rounded-2xl.fade-in,
+        .glass-card.rounded-2xl[data-aos],
         .contact-item.glass-card {
             position: relative;
             transform-style: preserve-3d;
         }
         .glass-card.rounded-2xl.fade-in::before,
+        .glass-card.rounded-2xl[data-aos]::before,
         .contact-item.glass-card::before {
             content: "";
             position: absolute;
@@ -222,7 +224,7 @@
     <!-- ===== PAGE HEADER ===== -->
     <section class="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 px-5">
         <div class="absolute top-[-15%] left-[-8%] w-[400px] h-[400px] rounded-full bg-[#14f1d9] opacity-[0.04] blur-[100px] pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto text-center relative z-10">
+        <div data-aos="fade-down" class="max-w-4xl mx-auto text-center relative z-10">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider text-[#14f1d9] bg-[#14f1d9]/10 border border-[#14f1d9]/20 mb-5">
                 <i class="fa-regular fa-paper-plane"></i> Kontak
             </div>
@@ -242,28 +244,28 @@
 
                 <!-- Kiri: Info Kontak -->
                 <div class="space-y-6 fade-in">
-                    <div class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
+                    <div data-aos="fade-right" class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
                         <div class="contact-icon-box"><i class="fa-brands fa-whatsapp"></i></div>
                         <div class="min-w-0">
                             <p class="text-xs text-slate-500 uppercase tracking-wider font-medium">WhatsApp</p>
                             <p class="text-white font-semibold break-words">+62 857-0768-0724</p>
                         </div>
                     </div>
-                    <div class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
+                    <div data-aos="fade-right" class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
                         <div class="contact-icon-box"><i class="fa-regular fa-envelope"></i></div>
                         <div class="min-w-0">
                             <p class="text-xs text-slate-500 uppercase tracking-wider font-medium">Email</p>
                             <p class="text-white font-semibold break-words">dirot224@gmail.com</p>
                         </div>
                     </div>
-                    <div class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
+                    <div data-aos="fade-right" class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
                         <div class="contact-icon-box"><i class="fa-regular fa-location-dot"></i></div>
                         <div class="min-w-0">
                             <p class="text-xs text-slate-500 uppercase tracking-wider font-medium">Lokasi</p>
                             <p class="text-white font-semibold break-words">Kec. Wiradesa, Kab. Pekalongan, Jawa Tengah</p>
                         </div>
                     </div>
-                    <div class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
+                    <div data-aos="fade-right" class="contact-item glass-card rounded-2xl p-5 flex items-center gap-4">
                         <div class="contact-icon-box"><i class="fa-regular fa-clock"></i></div>
                         <div class="min-w-0">
                             <p class="text-xs text-slate-500 uppercase tracking-wider font-medium">Jam Operasional</p>
@@ -272,7 +274,7 @@
                     </div>
 
                     <!-- Sosial Media -->
-                    <div class="glass-card rounded-2xl p-5">
+                    <div data-aos="fade-right" class="glass-card rounded-2xl p-5">
                         <p class="text-sm font-semibold text-white mb-4">Ikuti Kami</p>
                         <div class="flex flex-wrap gap-3">
                             <a href="https://www.instagram.com/mysteller_/" target="_blank" class="social-icon text-slate-400 text-base" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -284,7 +286,7 @@
                 </div>
 
                 <!-- Kanan: Form -->
-                <div class="glass-card rounded-2xl p-6 md:p-8 fade-in">
+                <div data-aos="fade-left" class="glass-card rounded-2xl p-6 md:p-8">
                     <h3 class="text-xl font-bold text-white mb-2">Kirim Pesan</h3>
                     <p class="text-sm text-slate-400 mb-6">Isi form di bawah dan kami akan membalas segera.</p>
                     <form onsubmit="return sendToWhatsApp(event)">
@@ -467,7 +469,13 @@
     <!-- AOS (Animate On Scroll) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 600,
+            offset: 40
+        });
+        window.addEventListener('load', function() {
+            AOS.refresh();
+        });
     </script>
 
 </body>

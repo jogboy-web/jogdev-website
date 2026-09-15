@@ -34,6 +34,7 @@
         }
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
         :root {
             --accent: #14f1d9;
@@ -343,7 +344,7 @@
         <div class="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-[#0ea5e9] opacity-[0.03] blur-[100px] pointer-events-none"></div>
 
         <div class="max-w-6xl mx-auto relative z-10">
-            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div class="grid md:grid-cols-2 gap-10 md:gap-[12rem] items-center">
 
                 <!-- Kiri: Teks -->
                 <div class="fade-in text-center md:text-left">
@@ -380,12 +381,12 @@
                 </div>
 
                 <!-- Kanan: Gambar dengan background transparan -->
-                <div class="fade-in flex justify-center md:justify-start">
-                    <div class="glass-reflect">
-                    <img src="boim.png"
+                <div class="fade-in flex justify-center md:justify-start h-auto">
+                    <div class="glass-reflect inline-block">
+                    <img src="boim-hero.jpeg"
                          alt="Jog.DEV — Front-End Web Developer"
                          data-aos="fade-left"
-                         class="w-full max-w-sm h-auto object-contain rounded-2xl"
+                         class="w-full max-w-[18rem] max-h-[26rem] h-auto object-cover object-top rounded-2xl mx-auto"
                          style="background: transparent;" />
                     </div>
                 </div>
@@ -430,15 +431,15 @@
 
                     <!-- Stat mini -->
                     <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-                        <div class="glass-card rounded-2xl p-5 text-center" data-aos="fade-up-right">
+                        <div class="glass-card rounded-2xl p-3.5 text-center" data-aos="fade-up-right">
                             <span class="block text-lg font-bold text-white">Handal</span>
                             <span class="mt-1 block text-xs text-slate-500">Pengalaman nyata</span>
                         </div>
-                        <div class="glass-card rounded-2xl p-5 text-center" data-aos="zoom-in-up">
+                        <div class="glass-card rounded-2xl p-3.5 text-center" data-aos="zoom-in-up">
                             <span class="block text-lg font-bold text-white">Tepat Waktu</span>
                             <span class="mt-1 block text-xs text-slate-500">Konsisten &amp; terukur</span>
                         </div>
-                        <div class="glass-card rounded-2xl p-5 text-center" data-aos="fade-up-left">
+                        <div class="glass-card rounded-2xl p-3.5 text-center" data-aos="fade-up-left">
                             <span class="block text-lg font-bold text-white">Terpercaya</span>
                             <span class="mt-1 block text-xs text-slate-500">Klien puas &amp; direkomendasikan</span>
                         </div>
@@ -514,11 +515,11 @@
     <!--  MOTTO / QUOTE                                              -->
     <!-- ============================================================ -->
     <section class="py-16 px-5">
-        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-10 md:p-16 text-center"
+        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-6 md:p-10 text-center"
              data-aos="zoom-in-up"
              style="border-color: rgba(20,241,217,0.12);">
-            <i class="fa-solid fa-quote-left text-4xl text-[#14f1d9]/20 block mb-6"></i>
-            <blockquote class="text-xl md:text-2xl text-white font-light leading-relaxed italic">
+            <i class="fa-solid fa-quote-left text-3xl text-[#14f1d9]/20 block mb-4"></i>
+            <blockquote class="text-lg md:text-xl text-white font-light leading-relaxed italic">
                 "Setiap website adalah <span class="text-[#14f1d9] font-semibold">cerita</span> 
                 yang layak ditampilkan dengan <span class="text-[#14f1d9] font-semibold">indah</span>."
             </blockquote>
@@ -530,7 +531,7 @@
     <!--  CTA BANNER                                                 -->
     <!-- ============================================================ -->
     <section class="pb-16 px-5">
-        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-14 text-center"
+        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-6 md:p-10 text-center"
              data-aos="zoom-in-up"
              style="border-color: rgba(20,241,217,0.15);">
             <p class="text-slate-300 text-base md:text-lg leading-relaxed max-w-lg mx-auto">
